@@ -1,7 +1,5 @@
 package UI;
 
-import java.awt.Frame;
-
 import javax.swing.*;
 
 public class GUI extends JFrame {
@@ -14,13 +12,14 @@ public class GUI extends JFrame {
 		//set up the window properties
 		setTitle("Networking Animation");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setExtendedState(Frame.MAXIMIZED_BOTH);
+		//setExtendedState(Frame.MAXIMIZED_BOTH);
+		setSize(1600, 900);
 		setDefaultLookAndFeelDecorated(true);
 		
 		setVisible(true);
 	}
 	
 	public static void main(String[] args){
-		GUI start = new GUI();
+		new GUI();
 	}
 }
