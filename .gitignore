@@ -6,6 +6,7 @@
 *.class
 *.dylib
 *.elc
+*.jar
 *.ln
 *.log
 *.o
@@ -16,6 +17,7 @@
 *.pyc
 *.pyo
 *.rej
+*.war
 *~
 ,*
 .#*
