@@ -13,29 +13,29 @@ import processing.core.*;
 public class Animation extends PApplet {
 
 	// declare the variables used for navigating the network
-	int locx, locy;
+	float locx, locy;
 
 	// declare location variables for layers
-	final int AL1X = 200, AL1Y = 50; // application layer left
-	final int AL2X = 1400, AL2Y = 50; // application layer right
-	final int PL1X = 200, PL1Y = 90; // presentation layer left
-	final int PL2X = 1400, PL2Y = 90; // presentation layer right
-	final int SL1X = 200, SL1Y = 130; // session layer left
-	final int SL2X = 1400, SL2Y = 130; // session layer right
-	final int TL1X = 200, TL1Y = 170; // transportation layer left
-	final int TL2X = 1400, TL2Y = 170; // transportation layer right
-	final int NL1X = 200, NL1Y = 210; // network layer left
-	final int NL2X = 1400, NL2Y = 210; // network layer right
-	final int DL1X = 200, DL1Y = 250; // datalink layer left
-	final int DL2X = 1400, DL2Y = 250; // datalink layer right
-	final int HL1X = 200, HL1Y = 290; // physical layer left
-	final int HL2X = 1400, HL2Y = 290; // physical layer right
+	float AL1X, AL1Y; // application layer left
+	float AL2X, AL2Y; // application layer right
+	float PL1X, PL1Y; // presentation layer left
+	float PL2X, PL2Y; // presentation layer right
+	float SL1X, SL1Y; // session layer left
+	float SL2X, SL2Y; // session layer right
+	float TL1X, TL1Y; // transportation layer left
+	float TL2X, TL2Y; // transportation layer right
+	float NL1X, NL1Y; // network layer left
+	float NL2X, NL2Y; // network layer right
+	float DL1X, DL1Y; // datalink layer left
+	float DL2X, DL2Y; // datalink layer right
+	float HL1X, HL1Y; // physical layer left
+	float HL2X, HL2Y; // physical layer right
 
 	// declare location variables for the computers and routers
-	final int C1X = 200, C1Y = 350; // computer 1
-	final int C2X = 1400, C2Y = 350; // computer 2
-	final int R1X = 400, R1Y = 350; // router 1
-	final int R2X = 1200, R2Y = 350; // router 2
+	float C1X, C1Y; // computer 1
+	float C2X, C2Y; // computer 2
+	float R1X, R1Y; // router 1
+	float R2X, R2Y; // router 2
 
 	// declare variable for font
 	PFont f;
@@ -45,17 +45,57 @@ public class Animation extends PApplet {
 	PImage computer;
 
 	// rectangle sizes
-	int rectX = 150;
-	int rectY = 30;
+	float rectX = 150;
+	float rectY = 30;
 
 	public void setup() {
-		size(1600, 900);
+		size(displayWidth, displayHeight);
+		
 
 		f = createFont("Arial", 16, true);
 
 		// set images
 		router = loadImage("Router1.jpg");
 		computer = loadImage("Computer1.jpg");
+		
+		AL1X = (width/8);
+		AL1Y = map(50, 0, 900, 0, height);	// application layer left
+		AL2X = (width/8)*7;
+		AL2Y = map(50, 0, 900, 0, height);	// application layer right
+		PL1X = (width/8);
+		PL1Y = map(90, 0, 900, 0, height);	// presentation layer left
+		PL2X = (width/8)*7;
+		PL2Y = map(90, 0, 900, 0, height);	// presentation layer right
+		SL1X = (width/8);
+		SL1Y = map(130, 0, 900, 0, height);	// session layer left
+		SL2X = (width/8)*7;
+		SL2Y = map(130, 0, 900, 0, height);	// session layer right
+		TL1X = (width/8);
+		TL1Y = map(170, 0, 900, 0, height);	// transportation layer left
+		TL2X = (width/8)*7;
+		TL2Y = map(170, 0, 900, 0, height);	// transportation layer right
+		NL1X = (width/8);
+		NL1Y = map(210, 0, 900, 0, height);	// network layer left
+		NL2X = (width/8)*7;
+		NL2Y = map(210, 0, 900, 0, height);	// network layer right
+		DL1X = (width/8);
+		DL1Y = map(250, 0, 900, 0, height);	// datalink layer left
+		DL2X = (width/8)*7;
+		DL2Y = map(250, 0, 900, 0, height);	// datalink layer right
+		HL1X = (width/8);
+		HL1Y = map(290, 0, 900, 0, height);	// physical layer left
+		HL2X = (width/8)*7;
+		HL2Y = map(290, 0, 900, 0, height);	// physical layer right
+
+		// declare location variables for the computers and routers
+		C1X = (width/8);
+		C1Y = map(350, 0, 900, 0, height); // computer 1
+		C2X = (width/8)*7;
+		C2Y = map(350, 0, 900, 0, height); // computer 2
+		R1X = (width/8)*2;
+		R1Y = map(350, 0, 900, 0, height); // router 1
+		R2X = (width/8)*6;
+		R2Y = map(350, 0, 900, 0, height); // router 2
 
 		// set the start location for
 		locx = AL1X;
@@ -189,16 +229,16 @@ public class Animation extends PApplet {
 
 		imageMode(CENTER);
 		// draw the computers
-		rect(200, 350, 50, 50); // c1
-		image(computer, C1X, C1Y);
-		rect(1400, 350, 50, 50); // c2
-		image(computer, C2X, C2Y);
+		//rect(200, 350, 50, 50); // c1
+		image(computer, C1X, C1Y);	// c1
+		//rect(1400, 350, 50, 50); // c2
+		image(computer, C2X, C2Y);	// c2
 
 		// draw the routers
-		rect(400, 350, 40, 40); // r1
-		image(router, R1X, R1Y);
-		rect(1200, 350, 40, 40); // r2
-		image(router, R2X, R2Y);
+		//rect(400, 350, 40, 40); // r1
+		image(router, R1X, R1Y);	// r1
+		//rect(1200, 350, 40, 40); // r2
+		image(router, R2X, R2Y);	// r2
 
 		// draw the transfer node
 		if (locy == C1Y) {
