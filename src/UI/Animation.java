@@ -12,6 +12,11 @@ import processing.core.*;
 
 public class Animation extends PApplet {
 
+	public static void main(String args[]) {
+	    PApplet.main(new String[] { "--present", "UI.Animation" });
+	  }
+	
+	
 	// declare the variables used for navigating the network
 	float locx, locy;
 
@@ -59,7 +64,9 @@ public class Animation extends PApplet {
 	boolean stopOver;
 	boolean pauseOver;
 	boolean resumeOver;
+	
 	boolean isPaused;
+	boolean isStart;
 
 	boolean locked;
 
@@ -293,7 +300,7 @@ public class Animation extends PApplet {
 		image(router, R2X, R2Y); // r2
 
 		// draw the transfer node
-		if (locy == C1Y) {
+		if (locy <= C1Y+1 && locy >= C1Y) {
 			fill(255, 0, 0);
 			strokeWeight(2);
 			ellipse(locx, locy, 30, 30);
@@ -301,6 +308,7 @@ public class Animation extends PApplet {
 
 		// drive through the animation
 		drive(isPaused);
+		output();
 
 	}
 
@@ -313,13 +321,16 @@ public class Animation extends PApplet {
 		 * until AL2 has been reached.
 		 */
 		
+		float vert = map(2, 50, 350, AL1Y, C1Y);
+		float horiz = map(5, 200, 1400, C1X, C2X);
+		
 		if (pause == false) {
 			if (locy < C1Y && locx == C1X) {
-				locy = locy + 2;
-			} else if (locy == C1Y && locx < C2X) {
-				locx = locx + 5;
-			} else if (locx == C2X && locy > AL2Y) {
-				locy = locy - 2;
+				locy = locy + vert;
+			} else if (locy >= C1Y && locx < C2X) {
+				locx = locx + horiz;
+			} else if (locx >= C2X && locy > AL2Y) {
+				locy = locy - vert;
 			} else if (locx == AL2X && locy == AL2Y) {
 				locx = 0;
 				locy = 0;
@@ -349,14 +360,120 @@ public class Animation extends PApplet {
 		}
 
 		if (mousePressed) {
-			if (start.pressed()) {
+			if (start.pressed() && !isPaused) {
 				begin();
-			} else if (stop.pressed()) {
+				isStart = true;
+			} else if (stop.pressed() && !isPaused) {
 				end();
-			} else if (pause.pressed()) {
+				isStart = false;
+			} else if (pause.pressed() && isStart) {
 				isPaused = true;
-			} else if (resume.pressed()) {
+			} else if (resume.pressed() && isStart) {
 				isPaused = false;
+			}
+		}
+	}
+	
+	void output(){
+		if(isStart && isPaused){
+			fill(225);
+			float x = width/2;
+			float y = map(550, 0, 900, 0, height);
+			rectMode(CENTER);
+			rect(x, y, 400, 200);
+			
+			textFont(f, 16);
+			fill(0);
+			textAlign(CENTER, CENTER);			
+			// based on the location of the traffic, output a given message.
+			if (locx == C1X && locy < PL1Y) {
+				// Application Layer
+				text("Application Layer:\nThe protocal type is chosen and the\n" +
+						"message is sent as data in a packet to the\n" +
+						" recieving computer.", x, y);
+			}
+			if (locx == C1X && locy >= PL1Y && locy < SL1Y) {
+				// Presentation Layer
+				text("Presentation Layer:\nThe protocal type is chosen and the\n" +
+						"message is sent as data in a packet to the\n" +
+						" recieving computer.", x, y);
+				
+			}
+			if (locx == C1X && locy >= SL1Y && locy < TL1Y) {
+				// Session Layer
+				text("Session Layer:\nThe protocal type is chosen and the\n" +
+						"message is sent as data in a packet to the\n" +
+						" recieving computer.", x, y);
+			}
+			if (locx == C1X && locy >= TL1Y && locy < NL1Y) {
+				// Transportation Layer
+				text("Transportation Layer:\n" +
+						"The protocal for the logical addressing is processed\n" +
+						"here.  A port is chosen based on the type of protocol,\n" +
+						"and an port number is attatched to the packet.", x, y);
+			}
+			if (locx == C1X && locy >= NL1Y && locy < DL1Y) {
+				// Network Layer
+				text("Network Layer:\n" +
+						"The network layer creates a connection between the\n" +
+						"source and the destination computer.  Here the IP\n" +
+						"address is attached to packet for both the source\n" +
+						"and the destination.", x, y);
+			}
+			if (locx == C1X && locy >= DL1Y && locy < HL1Y) {
+				// DataLink Layer
+				text("DataLink Layer:\n" +
+						"The data-link laer is responsible for transffering\n" +
+						"the message from router to router, finding a path for\n" +
+						"the message.  At this level a MAC address\n is assigned", x, y);
+			}
+			if (locx == C1X && locy >= HL1Y && locy < C1Y) {
+				// Physical Layer
+				text("Physical Layer:\n" +
+						"The signal is carried from one location to the next at\n" +
+						"this level.  It is carried by an analog signal.", x, y);
+			}
+			if (locx == C2X && locy >= AL2Y && locy < PL2Y) {
+				// application Layer 2
+				text("Application Layer:\nThe message is recieved and the\n" +
+						"information is presented to the user.", x, y);
+			}
+			if (locx == C2X && locy >= PL2Y && locy < SL2Y) {
+				// Presentation Layer 2
+				text("Presentation Layer:\nThe message is recieved and the\n" +
+						"information is presented to the user.", x, y);
+			}
+			if (locx == C2X && locy >= SL2Y && locy < TL2Y) {
+				// Session Layer 2
+				text("Session Layer:\nThe message is recieved and the information\n" +
+						"is presented to the user.", x, y);
+			}
+			if (locx == C2X && locy >= TL2Y && locy < NL2Y) {
+				// Transportation Layer 2
+				text("Transportation Layer:\n" +
+						"Here the port number is read, so that the right message\n" +
+						"protocal can be read to the application layer.", x, y);
+			}
+			if (locx == C2X && locy >= NL2Y && locy < DL2Y) {
+				// Network Layer 2
+				text("Network Layer:\n" +
+						"This is where the IP address is confirmed and the\n" +
+						"message is sent back up the the Transportation layer.", x, y);
+			}
+			if (locx == C2X && locy >= DL2Y && locy < HL2Y) {
+				// Data Link Layer 2
+				text("DataLink Layer:\n" +
+						"The MAC address is read here.  The Data-link layer\n" +
+						"translates the signal sent by the network layer.", x, y);
+			}			
+			if (locx == C2X && locy >= HL2Y && locy < C2Y) {
+				// Physical Layer 2
+				text("Physical Layer:\n" +
+						"The signal is recieved and it transferred back up to the\n" +
+						" Data-linkLayer.", x, y);
+			}
+			if (locy >= C2Y && locx > C1X && locx < C2X){
+				text("The message is being transmitted.", x ,y);
 			}
 		}
 	}
@@ -428,6 +545,5 @@ public class Animation extends PApplet {
 			fill(currentColor);
 			rect(x, y, w, h);
 		}
-	}
-
+	}	
 }
