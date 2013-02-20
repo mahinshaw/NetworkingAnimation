@@ -215,43 +215,43 @@ public class Animation extends PApplet {
 		rect(HL1X, HL1Y, rectW, rectH);
 
 		// draw the 7 layer architecture on side 2
-		if (locx == C2X && locy >= AL2Y && locy < PL2Y) {
+		if (locx >= C2X && locy >= AL2Y && locy < PL2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
 		}
 		rect(AL2X, AL2Y, rectW, rectH);
-		if (locx == C2X && locy >= PL2Y && locy < SL2Y) {
+		if (locx >= C2X && locy >= PL2Y && locy < SL2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
 		}
 		rect(PL2X, PL2Y, rectW, rectH);
-		if (locx == C2X && locy >= SL2Y && locy < TL2Y) {
+		if (locx >= C2X && locy >= SL2Y && locy < TL2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
 		}
 		rect(SL2X, SL2Y, rectW, rectH);
-		if (locx == C2X && locy >= TL2Y && locy < NL2Y) {
+		if (locx >= C2X && locy >= TL2Y && locy < NL2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
 		}
 		rect(TL2X, TL2Y, rectW, rectH);
-		if (locx == C2X && locy >= NL2Y && locy < DL2Y) {
+		if (locx >= C2X && locy >= NL2Y && locy < DL2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
 		}
 		rect(NL2X, NL2Y, rectW, rectH);
-		if (locx == C2X && locy >= DL2Y && locy < HL2Y) {
+		if (locx >= C2X && locy >= DL2Y && locy < HL2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
 		}
 		rect(DL2X, DL2Y, rectW, rectH);
-		if (locx == C2X && locy >= HL2Y && locy < C2Y) {
+		if (locx >= C2X && locy >= HL2Y && locy < C2Y) {
 			fill(255, 0, 0);
 		} else {
 			fill(123);
@@ -300,7 +300,7 @@ public class Animation extends PApplet {
 		image(router, R2X, R2Y); // r2
 
 		// draw the transfer node
-		if (locy <= C1Y+1 && locy >= C1Y) {
+		if (locy >= C1Y) {
 			fill(255, 0, 0);
 			strokeWeight(2);
 			ellipse(locx, locy, 30, 30);
@@ -327,7 +327,7 @@ public class Animation extends PApplet {
 		if (pause == false) {
 			if (locy < C1Y && locx == C1X) {
 				locy = locy + vert;
-			} else if (locy >= C1Y && locx < C2X) {
+			} else if (locy >= C1Y && locx <= C2X) {
 				locx = locx + horiz;
 			} else if (locx >= C2X && locy > AL2Y) {
 				locy = locy - vert;
@@ -433,40 +433,40 @@ public class Animation extends PApplet {
 						"The signal is carried from one location to the next at\n" +
 						"this level.  It is carried by an analog signal.", x, y);
 			}
-			if (locx == C2X && locy >= AL2Y && locy < PL2Y) {
+			if (locx >= C2X && locy >= AL2Y && locy < PL2Y) {
 				// application Layer 2
 				text("Application Layer:\nThe message is recieved and the\n" +
 						"information is presented to the user.", x, y);
 			}
-			if (locx == C2X && locy >= PL2Y && locy < SL2Y) {
+			if (locx >= C2X && locy >= PL2Y && locy < SL2Y) {
 				// Presentation Layer 2
 				text("Presentation Layer:\nThe message is recieved and the\n" +
 						"information is presented to the user.", x, y);
 			}
-			if (locx == C2X && locy >= SL2Y && locy < TL2Y) {
+			if (locx >= C2X && locy >= SL2Y && locy < TL2Y) {
 				// Session Layer 2
 				text("Session Layer:\nThe message is recieved and the information\n" +
 						"is presented to the user.", x, y);
 			}
-			if (locx == C2X && locy >= TL2Y && locy < NL2Y) {
+			if (locx >= C2X && locy >= TL2Y && locy < NL2Y) {
 				// Transportation Layer 2
 				text("Transportation Layer:\n" +
 						"Here the port number is read, so that the right message\n" +
 						"protocal can be read to the application layer.", x, y);
 			}
-			if (locx == C2X && locy >= NL2Y && locy < DL2Y) {
+			if (locx >= C2X && locy >= NL2Y && locy < DL2Y) {
 				// Network Layer 2
 				text("Network Layer:\n" +
 						"This is where the IP address is confirmed and the\n" +
 						"message is sent back up the the Transportation layer.", x, y);
 			}
-			if (locx == C2X && locy >= DL2Y && locy < HL2Y) {
+			if (locx >= C2X && locy >= DL2Y && locy < HL2Y) {
 				// Data Link Layer 2
 				text("DataLink Layer:\n" +
 						"The MAC address is read here.  The Data-link layer\n" +
 						"translates the signal sent by the network layer.", x, y);
 			}			
-			if (locx == C2X && locy >= HL2Y && locy < C2Y) {
+			if (locx >= C2X && locy >= HL2Y && locy < C2Y) {
 				// Physical Layer 2
 				text("Physical Layer:\n" +
 						"The signal is recieved and it transferred back up to the\n" +
