@@ -16,6 +16,22 @@ public class Animation extends PApplet {
 	    PApplet.main(new String[] { "--present", "UI.Animation" });
 	  }
 	
+	// declarations for Layer classes
+	Layer AL1, AL2;
+	Layer PL1, PL2;
+	Layer SL1, SL2;
+	Layer TL1, TL2;
+	Layer NL1, NL2;
+	Layer DL1, DL2;
+	Layer HL1, HL2;
+	int layerColor, selectColor;
+	
+	// declaration for Computer classes
+	Computer C1, C2;	
+	
+	// declaration for Router classes
+	Router R1, R2;
+	
 	
 	// declare the variables used for navigating the network
 	float locx, locy;
@@ -140,6 +156,26 @@ public class Animation extends PApplet {
 		R1Y = map(350, 0, 900, 0, height); // router 1
 		R2X = (width / 8) * 6;
 		R2Y = map(350, 0, 900, 0, height); // router 2
+		
+		//initialize layer colors
+		layerColor = color(255, 0, 0);	//red
+		selectColor = color(0, 255, 0);	// green
+		
+		// initialize layer classes
+		AL1 = new Layer(this, AL1X, AL1Y, rectW, rectH, "Application Layer", layerColor);
+		AL2 = new Layer(this, AL2X, AL2Y, rectW, rectH, "Application Layer", layerColor);
+		SL1 = new Layer(this, SL1X, SL1Y, rectW, rectH, "Session Layer", layerColor);
+		SL2 = new Layer(this, SL2X, SL2Y, rectW, rectH, "Session Layer", layerColor);
+		PL1 = new Layer(this, PL1X, PL1Y, rectW, rectH, "Presentation Layer", layerColor);
+		PL2 = new Layer(this, PL2X, PL2Y, rectW, rectH, "Presentation Layer", layerColor);
+		NL1 = new Layer(this, NL1X, NL1Y, rectW, rectH, "Network Layer", layerColor);
+		NL2 = new Layer(this, NL2X, NL2Y, rectW, rectH, "Network Layer", layerColor);
+		TL1 = new Layer(this, TL1X, TL1Y, rectW, rectH, "Transportation Layer", layerColor);
+		TL2 = new Layer(this, TL2X, TL2Y, rectW, rectH, "Transportation Layer", layerColor);
+		DL1 = new Layer(this, DL1X, DL1Y, rectW, rectH, "Data Link Layer", layerColor);
+		DL2 = new Layer(this, DL2X, DL2Y, rectW, rectH, "Data Link Layer", layerColor);
+		HL1 = new Layer(this, HL1X, HL1Y, rectW, rectH, "Physical Layer", layerColor);
+		HL2 = new Layer(this, HL2X, HL2Y, rectW, rectH, "Physical Layer", layerColor);
 
 		// set the begin location -- animation starts with start button
 		locx = 0;
@@ -172,93 +208,92 @@ public class Animation extends PApplet {
 
 		// draw the 7 layer architecture on side 1
 		if (locx == C1X && locy < PL1Y) {
-			fill(255, 0, 0);
+			AL1.display(selectColor);
 		} else {
-			fill(123);
+			AL1.display();
 		}
-		rect(AL1X, AL1Y, rectW, rectH);
+				
 		if (locx == C1X && locy >= PL1Y && locy < SL1Y) {
-			fill(255, 0, 0);
+			PL1.display(selectColor);
 		} else {
-			fill(123);
+			PL1.display();
 		}
-		rect(PL1X, PL1Y, rectW, rectH);
+		
 		if (locx == C1X && locy >= SL1Y && locy < TL1Y) {
-			fill(255, 0, 0);
+			SL1.display(selectColor);
 		} else {
-			fill(123);
+			SL1.display();
 		}
-		rect(SL1X, SL1Y, rectW, rectH);
+		
 		if (locx == C1X && locy >= TL1Y && locy < NL1Y) {
-			fill(255, 0, 0);
+			TL1.display(selectColor);
 		} else {
-			fill(123);
+			TL1.display();
 		}
-		rect(TL1X, TL1Y, rectW, rectH);
+		
 		if (locx == C1X && locy >= NL1Y && locy < DL1Y) {
-			fill(255, 0, 0);
+			NL1.display(selectColor);
 		} else {
-			fill(123);
+			NL1.display();
 		}
-		rect(NL1X, NL1Y, rectW, rectH);
+		
 		if (locx == C1X && locy >= DL1Y && locy < HL1Y) {
-			fill(255, 0, 0);
+			DL1.display(selectColor);
 		} else {
-			fill(123);
+			DL1.display();
 		}
-		rect(DL1X, DL1Y, rectW, rectH);
+		
 		if (locx == C1X && locy >= HL1Y && locy < C1Y) {
-			fill(255, 0, 0);
+			HL1.display(selectColor);
 		} else {
-			fill(123);
+			HL1.display();
 		}
-		rect(HL1X, HL1Y, rectW, rectH);
-
+		
 		// draw the 7 layer architecture on side 2
 		if (locx >= C2X && locy >= AL2Y && locy < PL2Y) {
-			fill(255, 0, 0);
+			AL2.display(selectColor);
 		} else {
-			fill(123);
+			AL2.display();
 		}
-		rect(AL2X, AL2Y, rectW, rectH);
+		
 		if (locx >= C2X && locy >= PL2Y && locy < SL2Y) {
-			fill(255, 0, 0);
+			PL2.display(selectColor);
 		} else {
-			fill(123);
+			PL2.display();
 		}
-		rect(PL2X, PL2Y, rectW, rectH);
+		
 		if (locx >= C2X && locy >= SL2Y && locy < TL2Y) {
-			fill(255, 0, 0);
+			SL2.display(selectColor);
 		} else {
-			fill(123);
+			SL2.display();
 		}
-		rect(SL2X, SL2Y, rectW, rectH);
+		
 		if (locx >= C2X && locy >= TL2Y && locy < NL2Y) {
-			fill(255, 0, 0);
+			TL2.display(selectColor);
 		} else {
-			fill(123);
+			TL2.display();
 		}
-		rect(TL2X, TL2Y, rectW, rectH);
+		
 		if (locx >= C2X && locy >= NL2Y && locy < DL2Y) {
-			fill(255, 0, 0);
+			NL2.display(selectColor);
 		} else {
-			fill(123);
+			NL2.display();
 		}
-		rect(NL2X, NL2Y, rectW, rectH);
+		
 		if (locx >= C2X && locy >= DL2Y && locy < HL2Y) {
-			fill(255, 0, 0);
+			DL2.display(selectColor);
 		} else {
-			fill(123);
+			DL2.display();
 		}
-		rect(DL2X, DL2Y, rectW, rectH);
+		
 		if (locx >= C2X && locy >= HL2Y && locy < C2Y) {
-			fill(255, 0, 0);
+			HL2.display(selectColor);
 		} else {
-			fill(123);
+			HL2.display();
 		}
-		rect(HL2X, HL2Y, rectW, rectH);
 
 		// draw text for 7L side 1
+		/*
 		textFont(f, 16);
 		fill(0);
 		textAlign(CENTER, CENTER);
@@ -278,6 +313,7 @@ public class Animation extends PApplet {
 		text("Network Layer", NL2X, NL2Y);
 		text("Datalink Layer", DL2X, DL2Y);
 		text("Physical Layer", HL2X, HL2Y);
+		*/
 
 		// draw the lines that will connect out routers
 		stroke(0);
