@@ -99,5 +99,13 @@ public class Layer extends Node {
 	public void display(){
 		display(color);
 	}
+	
+	public void display(Message m){
+		if (m.position.x == position.x && m.position.y >= (position.y - (height/2)) && m.position.y <= (position.y + (height / 2))){
+			display(m.color);
+		}else{
+			display(color);
+		}
+	}
 
 }

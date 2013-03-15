@@ -43,8 +43,8 @@ public class Animation extends PApplet {
 	String message1, message2;
 	
 	// declare the variables used for navigating the network
-	float locx, locy;
 	PVector loc;
+	PVector start, end;
 
 	// declare location variables for layers
 	float AL1X, AL1Y; // application layer left
@@ -109,8 +109,10 @@ public class Animation extends PApplet {
 
 		f = createFont("Georgia", 16, true);
 		
-		// initialize the location vector
+		// set the begin location -- animation starts with start button
 		loc = new PVector(0, 0);
+		start = new PVector((width / 8), map(160, 0, 900, 0, height));
+		end = new PVector((width / 8) * 7, map(16, 0, 900, 0, height));
 		
 		// intitialize the controller 
 		controller = new ControlP5(this);
@@ -279,101 +281,29 @@ public class Animation extends PApplet {
 		// initialize Message classes
 		m1 = new Message(this, loc, 30, 30, m1Color, message1);
 		m2 = new Message(this, loc, 30, 30, m2Color, message2);
-
-		// set the begin location -- animation starts with start button
-		locx = 0;
-		locy = 0;
 		
 	}
 
 	public void draw() {
 		background(200);
 		
-		// draw the 7 layer architecture on side 1
-		if (locx == C1X && locy < PL1Y) {
-			al1.display(selectColor);
-		} else {
-			al1.display();
-		}
-				
-		if (locx == C1X && locy >= PL1Y && locy < SL1Y) {
-			pl1.display(selectColor);
-		} else {
-			pl1.display();
-		}
+		//display using message input
+		al1.display(m1);
+		pl1.display(m1);
+		sl1.display(m1);
+		tl1.display(m1);
+		nl1.display(m1);
+		dl1.display(m1);
+		hl1.display(m1);
 		
-		if (locx == C1X && locy >= SL1Y && locy < TL1Y) {
-			sl1.display(selectColor);
-		} else {
-			sl1.display();
-		}
-		
-		if (locx == C1X && locy >= TL1Y && locy < NL1Y) {
-			tl1.display(selectColor);
-		} else {
-			tl1.display();
-		}
-		
-		if (locx == C1X && locy >= NL1Y && locy < DL1Y) {
-			nl1.display(selectColor);
-		} else {
-			nl1.display();
-		}
-		
-		if (locx == C1X && locy >= DL1Y && locy < HL1Y) {
-			dl1.display(selectColor);
-		} else {
-			dl1.display();
-		}
-		
-		if (locx == C1X && locy >= HL1Y && locy < C1Y) {
-			hl1.display(selectColor);
-		} else {
-			hl1.display();
-		}
-		
-		// draw the 7 layer architecture on side 2
-		if (locx >= C2X && locy >= AL2Y && locy < PL2Y) {
-			al2.display(selectColor);
-		} else {
-			al2.display();
-		}
-		
-		if (locx >= C2X && locy >= PL2Y && locy < SL2Y) {
-			pl2.display(selectColor);
-		} else {
-			pl2.display();
-		}
-		
-		if (locx >= C2X && locy >= SL2Y && locy < TL2Y) {
-			sl2.display(selectColor);
-		} else {
-			sl2.display();
-		}
-		
-		if (locx >= C2X && locy >= TL2Y && locy < NL2Y) {
-			tl2.display(selectColor);
-		} else {
-			tl2.display();
-		}
-		
-		if (locx >= C2X && locy >= NL2Y && locy < DL2Y) {
-			nl2.display(selectColor);
-		} else {
-			nl2.display();
-		}
-		
-		if (locx >= C2X && locy >= DL2Y && locy < HL2Y) {
-			dl2.display(selectColor);
-		} else {
-			dl2.display();
-		}
-		
-		if (locx >= C2X && locy >= HL2Y && locy < C2Y) {
-			hl2.display(selectColor);
-		} else {
-			hl2.display();
-		}
+		// display side 2 
+		al2.display(m1);
+		pl2.display(m1);
+		sl2.display(m1);
+		tl2.display(m1);
+		nl2.display(m1);
+		dl2.display(m1);
+		hl2.display(m1);
 
 		// draw the lines that will connect out routers
 		stroke(0);
@@ -392,15 +322,19 @@ public class Animation extends PApplet {
 		r2.display();
 
 		// draw the transfer node
-		if (locy >= C1Y) {
+		if (loc.y >= C1Y) {
 			fill(255, 0, 0);
 			strokeWeight(2);
-			ellipse(locx, locy, 30, 30);
+			ellipse(loc.x, loc.y, 30, 30);
 		}
 
 		// drive through the animation
 		drive(isPaused);
 		output();
+		
+		//update message location
+		m1.setVector(loc);
+		m2.setVector(loc);
 
 	}
 	
@@ -431,7 +365,9 @@ public class Animation extends PApplet {
 			}
 		}else if (value){
 			controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Play");
-			isPaused = true;
+			if(!isPaused && isStart){
+				isPaused = true;
+			}
 		}		
 	}
 	
@@ -439,11 +375,13 @@ public class Animation extends PApplet {
 		if(isStart == true){
 			end();
 			isStart = false;
+			isPaused = false;
+			controller.get(Toggle.class, "Start_Pause").setValue(true);
 		}
 	}
 
 	// method used for iteration of location variables
-	void drive(boolean pause) {
+	public void drive(boolean pause) {
 		/*
 		 * Incrementing the location variables start at AP1. Move down the
 		 * y-axis until C1 is reached. Once C1 has been reached, increment along
@@ -456,27 +394,27 @@ public class Animation extends PApplet {
 		float horiz = 3;	//map(5, 200, 1400, C1X, C2X);
 		
 		if (pause == false) {
-			if (locy < C1Y && locx == C1X) {
-				locy = locy + vert;
-			} else if (locy >= C1Y && locx <= C2X) {
-				locx = locx + horiz;
-			} else if (locx >= C2X && locy > AL2Y) {
-				locy = locy - vert;
-			} else if (locx == AL2X && locy == AL2Y) {
-				locx = 0;
-				locy = 0;
+			if (loc.y < C1Y && loc.x == C1X) {
+				loc.y = loc.y + vert;
+			} else if (loc.y >= C1Y && loc.x <= C2X) {
+				loc.x = loc.x + horiz;
+			} else if (loc.x >= C2X && loc.y > AL2Y) {
+				loc.x = C2X;
+				loc.y = loc.y - vert;
+			} else if (loc.x == AL2X && loc.y == AL2Y) {
+				Stop();
 			}
 		}
 	}
 	
 	void begin(){
-		locx = AL1X;
-		locy = AL1Y;
+		loc.x = AL1X;
+		loc.y = AL1Y;
 	}
 	
 	void end(){
-		locx = 0;
-		locy = 0;
+		loc.x = 0;
+		loc.y = 0;
 	}
 
 		
@@ -492,33 +430,33 @@ public class Animation extends PApplet {
 			fill(0);
 			textAlign(CENTER, CENTER);			
 			// based on the location of the traffic, output a given message.
-			if (locx == C1X && locy < PL1Y) {
+			if (loc.x == C1X && loc.y < PL1Y) {
 				// Application Layer
 				text("Application Layer:\nThe protocal type is chosen and the\n" +
 						"message is sent as data in a packet to the\n" +
 						" recieving computer.", x, y);
 			}
-			if (locx == C1X && locy >= PL1Y && locy < SL1Y) {
+			if (loc.x == C1X && loc.y >= PL1Y && loc.y < SL1Y) {
 				// Presentation Layer
 				text("Presentation Layer:\nThe protocal type is chosen and the\n" +
 						"message is sent as data in a packet to the\n" +
 						" recieving computer.", x, y);
 				
 			}
-			if (locx == C1X && locy >= SL1Y && locy < TL1Y) {
+			if (loc.x == C1X && loc.y >= SL1Y && loc.y < TL1Y) {
 				// Session Layer
 				text("Session Layer:\nThe protocal type is chosen and the\n" +
 						"message is sent as data in a packet to the\n" +
 						" recieving computer.", x, y);
 			}
-			if (locx == C1X && locy >= TL1Y && locy < NL1Y) {
+			if (loc.x == C1X && loc.y >= TL1Y && loc.y < NL1Y) {
 				// Transportation Layer
 				text("Transportation Layer:\n" +
 						"The protocal for the logical addressing is processed\n" +
 						"here.  A port is chosen based on the type of protocol,\n" +
 						"and an port number is attatched to the packet.", x, y);
 			}
-			if (locx == C1X && locy >= NL1Y && locy < DL1Y) {
+			if (loc.x == C1X && loc.y >= NL1Y && loc.y < DL1Y) {
 				// Network Layer
 				text("Network Layer:\n" +
 						"The network layer creates a connection between the\n" +
@@ -526,59 +464,59 @@ public class Animation extends PApplet {
 						"address is attached to packet for both the source\n" +
 						"and the destination.", x, y);
 			}
-			if (locx == C1X && locy >= DL1Y && locy < HL1Y) {
+			if (loc.x == C1X && loc.y >= DL1Y && loc.y < HL1Y) {
 				// DataLink Layer
 				text("DataLink Layer:\n" +
 						"The data-link laer is responsible for transffering\n" +
 						"the message from router to router, finding a path for\n" +
 						"the message.  At this level a MAC address\n is assigned", x, y);
 			}
-			if (locx == C1X && locy >= HL1Y && locy < C1Y) {
+			if (loc.x == C1X && loc.y >= HL1Y && loc.y < C1Y) {
 				// Physical Layer
 				text("Physical Layer:\n" +
 						"The signal is carried from one location to the next at\n" +
 						"this level.  It is carried by an analog signal.", x, y);
 			}
-			if (locx >= C2X && locy >= AL2Y && locy < PL2Y) {
+			if (loc.x >= C2X && loc.y >= AL2Y && loc.y < PL2Y) {
 				// application Layer 2
 				text("Application Layer:\nThe message is recieved and the\n" +
 						"information is presented to the user.", x, y);
 			}
-			if (locx >= C2X && locy >= PL2Y && locy < SL2Y) {
+			if (loc.x >= C2X && loc.y >= PL2Y && loc.y < SL2Y) {
 				// Presentation Layer 2
 				text("Presentation Layer:\nThe message is recieved and the\n" +
 						"information is presented to the user.", x, y);
 			}
-			if (locx >= C2X && locy >= SL2Y && locy < TL2Y) {
+			if (loc.x >= C2X && loc.y >= SL2Y && loc.y < TL2Y) {
 				// Session Layer 2
 				text("Session Layer:\nThe message is recieved and the information\n" +
 						"is presented to the user.", x, y);
 			}
-			if (locx >= C2X && locy >= TL2Y && locy < NL2Y) {
+			if (loc.x >= C2X && loc.y >= TL2Y && loc.y < NL2Y) {
 				// Transportation Layer 2
 				text("Transportation Layer:\n" +
 						"Here the port number is read, so that the right message\n" +
 						"protocal can be read to the application layer.", x, y);
 			}
-			if (locx >= C2X && locy >= NL2Y && locy < DL2Y) {
+			if (loc.x >= C2X && loc.y >= NL2Y && loc.y < DL2Y) {
 				// Network Layer 2
 				text("Network Layer:\n" +
 						"This is where the IP address is confirmed and the\n" +
 						"message is sent back up the the Transportation layer.", x, y);
 			}
-			if (locx >= C2X && locy >= DL2Y && locy < HL2Y) {
+			if (loc.x >= C2X && loc.y >= DL2Y && loc.y < HL2Y) {
 				// Data Link Layer 2
 				text("DataLink Layer:\n" +
 						"The MAC address is read here.  The Data-link layer\n" +
 						"translates the signal sent by the network layer.", x, y);
 			}			
-			if (locx >= C2X && locy >= HL2Y && locy < C2Y) {
+			if (loc.x >= C2X && loc.y >= HL2Y && loc.y < C2Y) {
 				// Physical Layer 2
 				text("Physical Layer:\n" +
 						"The signal is recieved and it transferred back up to the\n" +
 						" Data-linkLayer.", x, y);
 			}
-			if (locy >= C2Y && locx > C1X && locx < C2X){
+			if (loc.y >= C2Y && loc.x > C1X && loc.x < C2X){
 				text("The message is being transmitted.", x ,y);
 			}
 		}
