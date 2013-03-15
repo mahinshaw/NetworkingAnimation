@@ -79,6 +79,10 @@ public class Message extends Node{
 		message = m;
 	}
 	
+	public String className(){
+		return "Message";
+	}
+	
 	public void display(){
 		parent.fill(color);
 		parent.strokeWeight(2);

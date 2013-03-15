@@ -68,7 +68,7 @@ public class Node {
 		height = h;
 	}
 	
-	public String getClass(){
+	public String className(){
 		return "Node";
 	}
 }

@@ -32,6 +32,10 @@ public class Computer extends Node {
 		computer = parent.loadImage("Computer1.jpg");
 	}
 	
+	public String className(){
+		return "Computer";
+	}
+	
 	@SuppressWarnings("static-access")
 	public void display(){
 		parent.imageMode(parent.CENTER);
