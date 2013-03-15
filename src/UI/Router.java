@@ -23,6 +23,15 @@ public class Router extends Node {
 		router = parent.loadImage("Router1.jpg");
 	}
 	
+	public Router(PApplet p, PVector v, float w, float h) {
+		super();
+		parent = p;
+		super.setVector(v);
+		super.setWidth(w);
+		super.setHeight(h);
+		router = parent.loadImage("Router1.jpg");
+	}
+	
 public void display(){
 		parent.imageMode(parent.CENTER);
 		parent.image(router, position.x, position.y);

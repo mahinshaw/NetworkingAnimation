@@ -23,6 +23,15 @@ public class Computer extends Node {
 		computer = parent.loadImage("Computer1.jpg");
 	}
 	
+	public Computer(PApplet p, PVector v, float w, float h) {
+		super();
+		parent = p;
+		super.setVector(v);
+		super.setWidth(w);
+		super.setHeight(h);
+		computer = parent.loadImage("Computer1.jpg");
+	}
+	
 	public void display(){
 		parent.imageMode(parent.CENTER);
 		parent.image(computer, position.x, position.y);

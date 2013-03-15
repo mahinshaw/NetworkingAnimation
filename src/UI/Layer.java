@@ -35,6 +35,21 @@ public class Layer extends Node {
 		color = c;
 	}
 	
+	public Layer(PApplet p, PVector v, float w, float h, String t, int c) {
+		super();
+		parent = p;
+		super.setVector(v);
+		super.setWidth(w);
+		super.setHeight(h);
+		current = false;
+		text = t;
+		font = "Georgia";
+		point = 16;
+		aa = true;
+		f = parent.createFont(font, point, aa);
+		color = c;
+	}
+	
 	public void setColor(int c){
 		color = c;
 	}
@@ -64,7 +79,8 @@ public class Layer extends Node {
 	
 	public void display(int c){
 		
-		parent.stroke(255);
+		parent.stroke(0);
+		parent.strokeWeight(2);
 		parent.fill(c);
 		parent.rectMode(parent.CENTER);
 		parent.rect(position.x, position.y, width, height);

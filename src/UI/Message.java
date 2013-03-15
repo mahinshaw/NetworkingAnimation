@@ -14,14 +14,33 @@ public class Message extends Node{
 
 	PVector start;
 	PVector end;
+	
+	PVector speed;
+	
 	String message;
 	
-	public Message(PApplet p, float x, float y, float w, float h) {
+	int color;
+	
+	public Message(PApplet p, float x, float y, float w, float h, int c, String m) {
 		super();
 		parent = p;
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
+		speed = new PVector(3, 1);
+		color = c;
+		message = m;
+	}
+	
+	public Message(PApplet p, PVector v, float w, float h, int c, String m) {
+		super();
+		parent = p;
+		super.setVector(v);
+		super.setWidth(w);
+		super.setHeight(h);
+		speed = new PVector(3, 1);
+		color = c;
+		message = m;
 	}
 	
 	public PVector getStart(){
@@ -40,8 +59,28 @@ public class Message extends Node{
 		end = v.get();
 	}
 	
+	public PVector getSpeed(){
+		return speed.get();
+	}
+	
+	public int getColor(){
+		return color;
+	}
+	
+	public void setColor(int c){
+		color = c;
+	}
+	
+	public String getMessage(){
+		return message;
+	}
+	
+	public void setMessage(String m){
+		message = m;
+	}
+	
 	public void display(){
-		parent.fill(255);
+		parent.fill(color);
 		parent.strokeWeight(2);
 		parent.ellipse(position.x, position.y, width, height);
 	}

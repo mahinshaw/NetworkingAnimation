@@ -17,7 +17,6 @@ import processing.core.*;
 public class Node {
 	PApplet parent;
 	PVector position;
-	int type;
 	float width, height;
 	
 	public Node(){
@@ -25,7 +24,15 @@ public class Node {
 	}
 	
 	public PVector getVector(){
-		return position;
+		return position.get();
+	}
+	
+	public float getX(){
+		return position.x;
+	}
+	
+	public float getY(){
+		return position.y;
 	}
 	
 	public void setVector(float x, float y){
