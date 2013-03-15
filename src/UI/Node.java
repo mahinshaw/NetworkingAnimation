@@ -67,4 +67,8 @@ public class Node {
 	public void setHeight(float h){
 		height = h;
 	}
+	
+	public String getClass(){
+		return "Node";
+	}
 }

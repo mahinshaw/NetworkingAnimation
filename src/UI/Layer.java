@@ -77,6 +77,7 @@ public class Layer extends Node {
 		f = parent.createFont(font, point, aa);
 	}
 	
+	@SuppressWarnings("static-access")
 	public void display(int c){
 		
 		parent.stroke(0);

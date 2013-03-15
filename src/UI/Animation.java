@@ -98,22 +98,10 @@ public class Animation extends PApplet {
 	float rectH = 30;
 
 	// button variables
-	RectButton start, stop, pause, resume;
-	float startX, startY;
-	float stopX, stopY;
-	float pauseX, pauseY;
-	float resumeX, resumeY;
-	float bW = 100, bH = 40; // width and height of all buttons
-	boolean startOver;
-	boolean stopOver;
-	boolean pauseOver;
-	boolean resumeOver;
-	
 	boolean isPaused;
 	boolean isStart;
 	
-	boolean locked;
-
+	
 	public void setup() {
 		size(displayWidth, displayHeight);
 
@@ -137,6 +125,7 @@ public class Animation extends PApplet {
 		.setColorBackground(color(156, 156, 156))
 		.setText("Insert Message 1.")
 		.setAutoClear(true)
+		.setCaptionLabel("")
 		;
 		
 		controller.addTextfield("Message_2")
@@ -148,28 +137,30 @@ public class Animation extends PApplet {
 		.setColorBackground(color(156, 156, 156))
 		.setText("Insert Message 2.")
 		.setAutoClear(true)
+		.setCaptionLabel("")
 		;
-
-		// button location setup
-		startX = width / 2;
-		startY = map(150, 0, 900, 0, height);
-		stopX = width / 2;
-		stopY = map(200, 0, 900, 0, height);
-		pauseX = width / 2;
-		pauseY = map(250, 0, 900, 0, height);
-		resumeX = width / 2;
-		resumeY = map(300, 0, 900, 0, height);
-
-		// button setup
-		int buttonColor = color(123, 123, 123);
-		int highlight = color(0, 255, 255);
-
-		start = new RectButton(startX, startY, bW, bH, buttonColor, highlight);
-		stop = new RectButton(stopX, stopY, bW, bH, buttonColor, highlight);
-		pause = new RectButton(pauseX, pauseY, bW, bH, buttonColor, highlight);
-		resume = new RectButton(resumeX, resumeY, bW, bH, buttonColor,
-				highlight);
-
+		
+		controller.addToggle("Start_Pause")
+		.setPosition(map(1290, 0, 1600, 0, width), map(50, 0, 900, 0, height))
+		.setSize(80, 40)
+		.setValue(true)
+		.setCaptionLabel("Play")
+		.getCaptionLabel().align(CENTER, CENTER)
+		.setFont(f);
+		;
+		
+		controller.addBang("Stop")
+		.setPosition(map(1410, 0, 1600, 0, width), map(50, 0, 900, 0, height))
+		.setSize(80, 40)
+		.getCaptionLabel().align(CENTER, CENTER)
+		.setFont(f)
+		;
+		
+		// set flags for buttons
+		isStart = false;
+		isPaused = false;
+		
+		
 		// set images
 		router = loadImage("Router1.jpg");
 		computer = loadImage("Computer1.jpg");
@@ -296,24 +287,8 @@ public class Animation extends PApplet {
 	}
 
 	public void draw() {
-		background(255);
-		update(mouseX, mouseY);
+		background(200);
 		
-		// draw buttons
-		start.display();
-		stop.display();
-		pause.display();
-		resume.display();
-
-		// button text
-		textFont(f, 16);
-		fill(0);
-		textAlign(CENTER, CENTER);
-		text("Start", startX, startY);
-		text("Stop", stopX, stopY);
-		text("Pause", pauseX, pauseY);
-		text("Resume", resumeX, resumeY);
-
 		// draw the 7 layer architecture on side 1
 		if (locx == C1X && locy < PL1Y) {
 			al1.display(selectColor);
@@ -433,19 +408,38 @@ public class Animation extends PApplet {
 	 * Controller Methods
 	 */
 	
-	@SuppressWarnings("unused")
-	private void controlEvent(ControlEvent event){
+	public void controlEvent(ControlEvent event){
 		
 	}
 	
-	@SuppressWarnings("unused")
-	private void Message_1(String text){
+	public void Message_1(String text){
 		message1 = text;
 	}
 	
-	@SuppressWarnings("unused")
-	private void Message_2(String text){
+	public void Message_2(String text){
 		message2 = text;
+	}
+	
+	public void Start_Pause(boolean value){
+		if(!value){
+			controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Pause");
+			if(!isPaused && !isStart){
+				begin();
+				isStart = true;
+			}else if(isPaused && isStart){
+				isPaused = false;
+			}
+		}else if (value){
+			controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Play");
+			isPaused = true;
+		}		
+	}
+	
+	public void Stop(){
+		if(isStart == true){
+			end();
+			isStart = false;
+		}
 	}
 
 	// method used for iteration of location variables
@@ -485,32 +479,7 @@ public class Animation extends PApplet {
 		locy = 0;
 	}
 
-	void update(float x, float y) {
-		if (locked == false) {
-			// update buttons
-			start.update();
-			stop.update();
-			pause.update();
-			resume.update();
-		} else {
-			locked = false;
-		}
-
-		if (mousePressed) {
-			if (start.pressed() && !isPaused) {
-				begin();
-				isStart = true;
-			} else if (stop.pressed() && !isPaused) {
-				end();
-				isStart = false;
-			} else if (pause.pressed() && isStart) {
-				isPaused = true;
-			} else if (resume.pressed() && isStart) {
-				isPaused = false;
-			}
-		}
-	}
-	
+		
 	void output(){
 		if(isStart && isPaused){
 			fill(225);
@@ -612,75 +581,6 @@ public class Animation extends PApplet {
 			if (locy >= C2Y && locx > C1X && locx < C2X){
 				text("The message is being transmitted.", x ,y);
 			}
-		}
-	}
-
-	public class Button {
-		float x, y;
-		float w, h;
-		int baseColor, highlightColor;
-		int currentColor;
-		boolean over = false;
-		boolean pressed = false;
-
-		void update() {
-			if (over()) {
-				currentColor = highlightColor;
-			} else {
-				currentColor = baseColor;
-			}
-		}
-
-		boolean pressed() {
-			if (over) {
-				locked = true;
-				return true;
-			} else {
-				locked = false;
-				return false;
-			}
-		}
-
-		boolean over() {
-			return true;
-		}
-
-		boolean overRect(float x, float y, float w, float h) {
-			if (mouseX >= x - (w / 2) && mouseX <= x + (w / 2)
-					&& mouseY >= y - (h / 2) && mouseY <= y + (h / 2)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	class RectButton extends Button {
-		RectButton(float ix, float iy, float iw, float ih, int icolor,
-				int ihighlight) {
-			x = ix;
-			y = iy;
-			w = iw;
-			h = ih;
-			baseColor = icolor;
-			highlightColor = ihighlight;
-			currentColor = baseColor;
-		}
-
-		boolean over() {
-			if (overRect(x, y, w, h)) {
-				over = true;
-				return true;
-			} else {
-				over = false;
-				return false;
-			}
-		}
-
-		void display() {
-			stroke(255);
-			fill(currentColor);
-			rect(x, y, w, h);
 		}
 	}	
 }

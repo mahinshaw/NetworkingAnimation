@@ -32,6 +32,7 @@ public class Router extends Node {
 		router = parent.loadImage("Router1.jpg");
 	}
 	
+@SuppressWarnings("static-access")
 public void display(){
 		parent.imageMode(parent.CENTER);
 		parent.image(router, position.x, position.y);
