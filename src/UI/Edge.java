@@ -6,15 +6,15 @@ public class Edge {
 	
 	private PApplet parent;
 	
-	PVector start, end;
+	Node start, end;
 	
 	private int weight;
 	private int color;
 	
-	public Edge(PApplet p, PVector s, PVector e){
+	public Edge(PApplet p, Node s, Node e){
 		parent = p;
-		start = s.get();
-		end = e.get();
+		start = s;
+		end = e;
 		color = parent.color(0, 0, 0 );
 	}
 	
@@ -31,7 +31,9 @@ public class Edge {
 	}
 	
 	public void display(){
-		parent.fill(color);
-		parent.line(start.x, start.y, end.x, end.y);
+		if(start.className() != "Layer" && end.className() != "Layer"){
+			parent.fill(color);
+			parent.line(start.position.x, start.position.y, end.position.x, end.position.y);
+		}
 	}
 }

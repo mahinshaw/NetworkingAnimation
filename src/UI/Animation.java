@@ -44,7 +44,7 @@ public class Animation extends PApplet {
 	
 	// declare the variables used for navigating the network
 	PVector loc;
-	PVector start, end;
+	Node start, end;
 
 	// declare location variables for layers
 	float AL1X, AL1Y; // application layer left
@@ -86,6 +86,10 @@ public class Animation extends PApplet {
 	float R2X, R2Y; // router 2
 	PVector R2;
 	
+	// declare the Graph
+	Graph g1;
+	Graph g2;
+	
 	// declare variable for font
 	PFont f;
 
@@ -100,6 +104,7 @@ public class Animation extends PApplet {
 	// button variables
 	boolean isPaused;
 	boolean isStart;
+	boolean isEnd;
 	
 	
 	public void setup() {
@@ -111,8 +116,10 @@ public class Animation extends PApplet {
 		
 		// set the begin location -- animation starts with start button
 		loc = new PVector(0, 0);
-		start = new PVector((width / 8), map(160, 0, 900, 0, height));
-		end = new PVector((width / 8) * 7, map(16, 0, 900, 0, height));
+		PVector v1 = new PVector((width / 8), map(160, 0, 900, 0, height));
+		PVector v2 = new PVector((width / 8) * 7, map(160, 0, 900, 0, height));
+		start = new Node(this, v1);
+		end = new Node(this, v2);
 		
 		// intitialize the controller 
 		controller = new ControlP5(this);
@@ -161,7 +168,7 @@ public class Animation extends PApplet {
 		// set flags for buttons
 		isStart = false;
 		isPaused = false;
-		
+		isEnd = true;
 		
 		// set images
 		router = loadImage("Router1.jpg");
@@ -270,6 +277,27 @@ public class Animation extends PApplet {
 		r1 = new Router(this, R1, 40, 40);
 		r2 = new Router(this, R2, 40, 40);
 		
+		// add edges
+		start.addEdge(al1);
+		al1.addEdge(pl1);
+		pl1.addEdge(sl1);
+		sl1.addEdge(tl1);
+		tl1.addEdge(nl1);
+		nl1.addEdge(dl1);
+		dl1.addEdge(hl1);
+		hl1.addEdge(c1);
+		c1.addEdge(r1);
+		r1.addEdge(r2);
+		r2.addEdge(c2);
+		c2.addEdge(hl2);
+		hl2.addEdge(dl2);
+		dl2.addEdge(nl2);
+		nl2.addEdge(tl2);
+		tl2.addEdge(sl2);
+		sl2.addEdge(pl2);
+		pl2.addEdge(sl2);
+		al2.addEdge(end);
+		
 		// initialize message colors
 		m1Color = color(255, 0, 0);
 		m2Color = color(0, 0, 255);
@@ -279,9 +307,31 @@ public class Animation extends PApplet {
 		message2 = controller.get(Textfield.class, "Message_2").getText();
 		
 		// initialize Message classes
-		m1 = new Message(this, loc, 30, 30, m1Color, message1);
-		m2 = new Message(this, loc, 30, 30, m2Color, message2);
+		m1 = new Message(this, start.position, 30, 30, m1Color, message1);
+		m2 = new Message(this, start.position, 30, 30, m2Color, message2);
 		
+		// initialize graph
+		g1 = new Graph(this, m1);
+		g1.addNode(start);
+		g1.addNode(al1);
+		g1.addNode(pl1);
+		g1.addNode(sl1);
+		g1.addNode(tl1);
+		g1.addNode(nl1);
+		g1.addNode(dl1);
+		g1.addNode(hl1);
+		g1.addNode(c1);
+		g1.addNode(r1);
+		g1.addNode(r2);
+		g1.addNode(c2);
+		g1.addNode(hl2);
+		g1.addNode(dl2);
+		g1.addNode(nl2);
+		g1.addNode(tl2);
+		g1.addNode(sl2);
+		g1.addNode(pl2);
+		g1.addNode(al2);
+		g1.addNode(end);
 	}
 
 	public void draw() {
@@ -306,21 +356,29 @@ public class Animation extends PApplet {
 		hl2.display(m1);
 
 		// draw the lines that will connect out routers
-		stroke(0);
+		/*stroke(0);
 		strokeWeight(4);
 		line(C1X, C1Y, R1X, R2Y);
 		line(R1X, R1Y, R2X, R2Y);
 		line(R2X, R2Y, C2X, C2Y);
-
+		*/
 		
 		// draw the computers
 		c1.display();
-		c2.display();
-		
+				
 		// draw the routers
 		r1.display();
 		r2.display();
+		
+		// draw computer 2
+		c2.display();
+		
+		g1.travel(isStart, isPaused);
+		if(g1.message.position.equals(end.position)){
+			Stop();
+		}
 
+		/*
 		// draw the transfer node
 		if (loc.y >= C1Y) {
 			fill(255, 0, 0);
@@ -335,7 +393,7 @@ public class Animation extends PApplet {
 		//update message location
 		m1.setVector(loc);
 		m2.setVector(loc);
-
+		*/
 	}
 	
 	/*
@@ -359,6 +417,8 @@ public class Animation extends PApplet {
 			controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Pause");
 			if(!isPaused && !isStart){
 				begin();
+				m1.setVector(start.position);
+				g1.setCurrentNode(0);
 				isStart = true;
 			}else if(isPaused && isStart){
 				isPaused = false;
@@ -372,11 +432,12 @@ public class Animation extends PApplet {
 	}
 	
 	public void Stop(){
-		if(isStart == true){
+		if(isStart){
 			end();
 			isStart = false;
 			isPaused = false;
 			controller.get(Toggle.class, "Start_Pause").setValue(true);
+			m1.setVector(start.position);
 		}
 	}
 

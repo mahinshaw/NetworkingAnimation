@@ -12,22 +12,19 @@ import processing.core.*;
 
 public class Layer extends Node {
 	
-	boolean current;
 	int color;
-	String text;
+	String name;
 	String font;
 	int point;
 	boolean aa;
 	PFont f;
 
 	public Layer(PApplet p, float x, float y, float w, float h, String t, int c) {
-		super();
-		parent = p;
+		super(p);
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
-		current = false;
-		text = t;
+		name = t;
 		font = "Arial";
 		point = 16;
 		aa = true;
@@ -36,13 +33,11 @@ public class Layer extends Node {
 	}
 	
 	public Layer(PApplet p, PVector v, float w, float h, String t, int c) {
-		super();
-		parent = p;
+		super(p);
 		super.setVector(v);
 		super.setWidth(w);
 		super.setHeight(h);
-		current = false;
-		text = t;
+		name = t;
 		font = "Georgia";
 		point = 16;
 		aa = true;
@@ -59,7 +54,7 @@ public class Layer extends Node {
 	}
 	
 	public void setText(String t){
-		text = t;
+		name = t;
 	}
 	
 	public void setFont(String s){
@@ -93,7 +88,7 @@ public class Layer extends Node {
 		parent.textFont(f);
 		parent.fill(0);
 		parent.textAlign(parent.CENTER, parent.CENTER);
-		parent.text(text, position.x, position.y);
+		parent.text(name, position.x, position.y);
 	}
 	
 	public void display(){

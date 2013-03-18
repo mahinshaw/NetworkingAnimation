@@ -15,8 +15,7 @@ public class Router extends Node {
 	PImage router;
 	
 	public Router(PApplet p, float x, float y, float w, float h) {
-		super();
-		parent = p;
+		super(p);
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
@@ -24,8 +23,7 @@ public class Router extends Node {
 	}
 	
 	public Router(PApplet p, PVector v, float w, float h) {
-		super();
-		parent = p;
+		super(p);
 		super.setVector(v);
 		super.setWidth(w);
 		super.setHeight(h);
@@ -36,8 +34,9 @@ public class Router extends Node {
 		return "Router";
 	}
 	
-@SuppressWarnings("static-access")
-public void display(){
+	@SuppressWarnings("static-access")
+	public void display(){
+		super.display();
 		parent.imageMode(parent.CENTER);
 		parent.image(router, position.x, position.y);
 	}	

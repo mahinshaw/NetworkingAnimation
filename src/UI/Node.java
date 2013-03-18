@@ -1,5 +1,7 @@
 package UI;
 
+import java.util.ArrayList;
+
 import processing.core.*;
 
 /*
@@ -18,9 +20,23 @@ public class Node {
 	PApplet parent;
 	PVector position;
 	float width, height;
+	ArrayList<Edge> edges;
+	int edgeCount;
 	
-	public Node(){
+	public Node(PApplet p){
+		parent = p;
 		position = new PVector();
+		edges = new ArrayList<Edge>();
+		edgeCount = 0;
+	}
+	
+	public Node(PApplet p, PVector v){
+		parent = p;
+		position = new PVector(v.x, v.y);
+		edges = new ArrayList<Edge>();
+		width = 0;
+		height = 0;
+		edgeCount = 0;
 	}
 	
 	public PVector getVector(){
@@ -70,5 +86,28 @@ public class Node {
 	
 	public String className(){
 		return "Node";
+	}
+	
+	public ArrayList<Edge> getEdges(){
+		return edges;
+	}
+	
+	public void addEdge(Node n){
+		Edge e = new Edge(parent, this, n);
+		edges.add(e);
+		edgeCount++;
+	}
+	
+	public int edgeCount(){
+		return edgeCount;
+	}
+	
+	public void display(){
+		if(edgeCount > 0){
+			for (int i = 0; i < edgeCount; i++){
+				Edge e = edges.get(i);
+				e.display();
+			}
+		}
 	}
 }

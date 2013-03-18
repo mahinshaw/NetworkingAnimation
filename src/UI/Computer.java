@@ -15,8 +15,7 @@ public class Computer extends Node {
 	PImage computer;
 
 	public Computer(PApplet p, float x, float y, float w, float h) {
-		super();
-		parent = p;
+		super(p);
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
@@ -24,8 +23,7 @@ public class Computer extends Node {
 	}
 	
 	public Computer(PApplet p, PVector v, float w, float h) {
-		super();
-		parent = p;
+		super(p);
 		super.setVector(v);
 		super.setWidth(w);
 		super.setHeight(h);
@@ -38,8 +36,8 @@ public class Computer extends Node {
 	
 	@SuppressWarnings("static-access")
 	public void display(){
+		super.display();
 		parent.imageMode(parent.CENTER);
 		parent.image(computer, position.x, position.y);
 	}
-
 }
