@@ -39,5 +39,20 @@ public class Router extends Node {
 		super.display();
 		parent.imageMode(parent.CENTER);
 		parent.image(router, position.x, position.y);
-	}	
+	}
+	
+	public void output(Message m){
+		if (m.position.x >= (position.x - (width)) && m.position.x <= (position.x + (width))
+				&& m.position.y >= (position.y - (height / 2))
+				&& m.position.y <= (position.y + (height / 2))){
+			float x = (parent.width / 2);
+			float y = parent.map(700, 0, 900, 0, parent.height);
+			parent.rectMode(parent.CENTER);
+
+			PFont f = parent.createFont("Georgia", 16, true);
+			parent.textFont(f);
+			parent.fill(225);
+			parent.rect(x, y, 600, 200);
+		}
+	}
 }

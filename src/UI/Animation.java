@@ -44,7 +44,7 @@ public class Animation extends PApplet {
 	
 	// declare the variables used for navigating the network
 	PVector loc;
-	Node start, end;
+	Node start, end, end2;
 
 	// declare location variables for layers
 	float AL1X, AL1Y; // application layer left
@@ -86,6 +86,29 @@ public class Animation extends PApplet {
 	float R2X, R2Y; // router 2
 	PVector R2;
 	
+	//third layer, routers, computers
+	PVector AL3;
+	PVector PL3;
+	PVector SL3;
+	PVector TL3;
+	PVector NL3;
+	PVector DL3;
+	PVector HL3;
+	
+	PVector C3;
+	PVector R3;
+	
+	Layer al3;
+	Layer pl3;
+	Layer sl3;
+	Layer tl3;
+	Layer nl3;
+	Layer dl3;
+	Layer hl3;
+	
+	Computer c3;
+	Router r3;
+	
 	// declare the Graph
 	Graph g1;
 	Graph g2;
@@ -105,7 +128,7 @@ public class Animation extends PApplet {
 	boolean isPaused;
 	boolean isStart;
 	boolean isEnd;
-	
+	boolean g1Move;
 	
 	public void setup() {
 		size(displayWidth, displayHeight);
@@ -118,8 +141,10 @@ public class Animation extends PApplet {
 		loc = new PVector(0, 0);
 		PVector v1 = new PVector((width / 8), map(160, 0, 900, 0, height));
 		PVector v2 = new PVector((width / 8) * 7, map(160, 0, 900, 0, height));
+		PVector v3 = new PVector((width / 8) * 5, map(120, 0, 900, 0, height));
 		start = new Node(this, v1);
 		end = new Node(this, v2);
+		end2 = new Node(this, v3);
 		
 		// intitialize the controller 
 		controller = new ControlP5(this);
@@ -169,6 +194,7 @@ public class Animation extends PApplet {
 		isStart = false;
 		isPaused = false;
 		isEnd = true;
+		g1Move = true;
 		
 		// set images
 		router = loadImage("Router1.jpg");
@@ -248,8 +274,20 @@ public class Animation extends PApplet {
 		R2Y = map(480, 0, 900, 0, height); // router 2
 		R2 = new PVector((width / 8) * 6, map(480, 0, 900, 0, height));
 		
+		// third set
+		AL3 = new PVector((width / 8) *5, map(140, 0, 900, 0, height));
+		PL3 = new PVector((width / 8) *5, map(180, 0, 900, 0, height));
+		SL3 = new PVector((width / 8) *5, map(220, 0, 900, 0, height));
+		TL3 = new PVector((width / 8) *5, map(260, 0, 900, 0, height));
+		NL3 = new PVector((width / 8) *5, map(300, 0, 900, 0, height));
+		DL3 = new PVector((width / 8) *5, map(340, 0, 900, 0, height));
+		HL3 = new PVector((width / 8) *5, map(380, 0, 900, 0, height));
 		
-		//initialize layer colors
+		R3 = new PVector((width / 8) *4, map(440, 0, 900, 0, height));
+		C3 = new PVector((width / 8) *5, map(440, 0, 900, 0, height));
+		
+		
+		// initialize layer colors
 		layerColor = color(123, 123, 123);	// grey
 		selectColor = color(0, 255, 0);	// green
 		
@@ -268,6 +306,18 @@ public class Animation extends PApplet {
 		dl2 = new Layer(this, DL2, rectW, rectH, "Data Link Layer", layerColor);
 		hl1 = new Layer(this, HL1, rectW, rectH, "Physical Layer", layerColor);
 		hl2 = new Layer(this, HL2, rectW, rectH, "Physical Layer", layerColor);
+		
+		//third layer
+		al3 = new Layer(this, AL3, rectW, rectH, "Application Layer", layerColor);
+		pl3 = new Layer(this, PL3, rectW, rectH, "Presentation Layer", layerColor);
+		sl3 = new Layer(this, SL3, rectW, rectH, "Session Layer", layerColor);
+		tl3 = new Layer(this, TL3, rectW, rectH, "Transportation Layer", layerColor);
+		nl3 = new Layer(this, NL3, rectW, rectH, "Network Layer", layerColor);
+		dl3 = new Layer(this, DL3, rectW, rectH, "Data Link Layer", layerColor);
+		hl3 = new Layer(this, HL3, rectW, rectH, "Physical Layer", layerColor);
+		
+		c3 = new Computer(this, C3, 50, 50);
+		r3 = new Router(this, R3, 40, 40);
 		
 		//initialize Computer classes
 		c1 = new Computer(this, C1, 50, 50);
@@ -297,6 +347,29 @@ public class Animation extends PApplet {
 		sl2.addEdge(pl2);
 		pl2.addEdge(sl2);
 		al2.addEdge(end);
+		
+		//third layer - second set of edges
+		/* already exist
+		 * start.addEdge(al1);
+		 * al1.addEdge(pl1);
+		 * pl1.addEdge(sl1);
+		 * sl1.addEdge(tl1);
+		 * tl1.addEdge(nl1);
+		 * nl1.addEdge(dl1);
+		 * dl1.addEdge(hl1);
+		 * hl1.addEdge(c1);
+		 * c1.addEdge(r1);
+		*/
+		r1.addEdge(r3);
+		r3.addEdge(c3);
+		c3.addEdge(hl3);
+		hl3.addEdge(dl3);
+		dl3.addEdge(nl3);
+		nl3.addEdge(tl3);
+		tl3.addEdge(sl3);
+		sl3.addEdge(pl3);
+		pl3.addEdge(sl3);
+		al3.addEdge(end2);
 		
 		// initialize message colors
 		m1Color = color(255, 0, 0);
@@ -332,20 +405,53 @@ public class Animation extends PApplet {
 		g1.addNode(pl2);
 		g1.addNode(al2);
 		g1.addNode(end);
+		
+		// initialize the second graph
+		g2 = new Graph(this, m2);
+		g2.addNode(start);
+		g2.addNode(al1);
+		g2.addNode(pl1);
+		g2.addNode(sl1);
+		g2.addNode(tl1);
+		g2.addNode(nl1);
+		g2.addNode(dl1);
+		g2.addNode(hl1);
+		g2.addNode(c1);
+		g2.addNode(r1);
+		g2.addNode(r3);
+		g2.addNode(c3);
+		g2.addNode(hl3);
+		g2.addNode(dl3);
+		g2.addNode(nl3);
+		g2.addNode(tl3);
+		g2.addNode(sl3);
+		g2.addNode(pl3);
+		g2.addNode(al3);
+		g2.addNode(end2);
+		
 	}
 
 	public void draw() {
 		background(200);
 		
 		//display using message input
-		al1.display(m1);
-		pl1.display(m1);
-		sl1.display(m1);
-		tl1.display(m1);
-		nl1.display(m1);
-		dl1.display(m1);
-		hl1.display(m1);
-		
+		if (g1Move){
+			al1.display(m1);
+			pl1.display(m1);
+			sl1.display(m1);
+			tl1.display(m1);
+			nl1.display(m1);
+			dl1.display(m1);
+			hl1.display(m1);
+		}else if(!g1Move){
+			al1.display(m2);
+			pl1.display(m2);
+			sl1.display(m2);
+			tl1.display(m2);
+			nl1.display(m2);
+			dl1.display(m2);
+			hl1.display(m2);	
+		}
 		// display side 2 
 		al2.display(m1);
 		pl2.display(m1);
@@ -354,28 +460,44 @@ public class Animation extends PApplet {
 		nl2.display(m1);
 		dl2.display(m1);
 		hl2.display(m1);
-
-		// draw the lines that will connect out routers
-		/*stroke(0);
-		strokeWeight(4);
-		line(C1X, C1Y, R1X, R2Y);
-		line(R1X, R1Y, R2X, R2Y);
-		line(R2X, R2Y, C2X, C2Y);
-		*/
 		
+		// display side 3
+		al3.display(m2);
+		pl3.display(m2);
+		sl3.display(m2);
+		tl3.display(m2);
+		nl3.display(m2);
+		dl3.display(m2);
+		hl3.display(m2);
+
 		// draw the computers
 		c1.display();
 				
 		// draw the routers
 		r1.display();
 		r2.display();
+		r3.display();
 		
 		// draw computer 2
 		c2.display();
+		c3.display();
 		
-		g1.travel(isStart, isPaused);
-		if(g1.message.position.equals(end.position)){
-			Stop();
+		if (g1Move){
+			m1.setMessage(message1);
+			g1.travel(isStart, isPaused);
+			g1.output();
+			if(g1.message.position.equals(end.position)){
+				Stop();
+				g1Move = false;
+			}
+		}else if(!g1Move){
+			m2.setMessage(message2);
+			g2.travel(isStart, isPaused);
+			g2.output();
+			if(g2.message.position.equals(end2.position)){
+				Stop();
+				g1Move = true;
+			}
 		}
 
 		/*
@@ -416,9 +538,10 @@ public class Animation extends PApplet {
 		if(!value){
 			controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Pause");
 			if(!isPaused && !isStart){
-				begin();
-				m1.setVector(start.position);
+				m1.setVector(start.position);				
 				g1.setCurrentNode(0);
+				m2.setVector(start.position);
+				g2.setCurrentNode(0);
 				isStart = true;
 			}else if(isPaused && isStart){
 				isPaused = false;
@@ -433,11 +556,11 @@ public class Animation extends PApplet {
 	
 	public void Stop(){
 		if(isStart){
-			end();
 			isStart = false;
 			isPaused = false;
 			controller.get(Toggle.class, "Start_Pause").setValue(true);
 			m1.setVector(start.position);
+			m2.setVector(start.position);
 		}
 	}
 
@@ -483,7 +606,7 @@ public class Animation extends PApplet {
 		if(isStart && isPaused){
 			fill(225);
 			float x = width/2;
-			float y = map(550, 0, 900, 0, height);
+			float y = map(700, 0, 900, 0, height);
 			rectMode(CENTER);
 			rect(x, y, 400, 200);
 			

@@ -110,4 +110,8 @@ public class Node {
 			}
 		}
 	}
+	
+	public void output(Message m){
+		
+	}
 }
