@@ -31,7 +31,7 @@ public class Message extends Node{
 	private String sfd;
 	
 	// sine wave variables
-	private int frequency, amplitude;
+	private float frequency, amplitude;
 	private boolean shiftKey;			// if true then fsk, else, ask
 	
 	int color;
@@ -53,9 +53,9 @@ public class Message extends Node{
 		crc = "";
 		preamble = "101010101010101010101010101010101010101010";
 		sfd = "10101011";
-		frequency = 30;
-		amplitude = 100;
-		shiftKey = true; // default = fsk
+		frequency = 9;
+		amplitude = 200;
+		shiftKey = false; // default = fsk
 	}
 	
 	public Message(PApplet p, PVector v, float w, float h, int c, String m) {
@@ -75,9 +75,9 @@ public class Message extends Node{
 		crc = "";
 		preamble = "101010101010101010101010101010101010101010";
 		sfd = "10101011";
-		frequency = 30;
-		amplitude = 100;
-		shiftKey = true; // default = fsk
+		frequency = 9;
+		amplitude = 200;
+		shiftKey = false; // default = fsk
 	}
 	
 	/*
@@ -172,11 +172,11 @@ public class Message extends Node{
 		return binary;
 	}
 	
-	public int getAmplitude(){
+	public float getAmplitude(){
 		return amplitude;
 	}
 	
-	public int getFrequency(){
+	public float getFrequency(){
 		return frequency;
 	}
 	
@@ -255,34 +255,78 @@ public class Message extends Node{
 	 * @param x and y -  this will be in the width and height of the rectangle to draw sine waves inside of
 	 * @param i - this will be the bit value passed in from the String of bits(most likely the binary variable 
 	 */
-	public void sineWave(int i, int x, int y){
+	public void sineWave(int i, float x, float y){
 		
-		int freq, amp;
+		float freq = frequency;
+		float amp = amplitude;
 		if (shiftKey){
 			// FSK
 			// increment the incoming integer so that 1 = 2 and 0 = 1, to be used as multiples for frequency
-			i++;
-			freq = frequency * i; 
-			parent.bezier(x - freq, y/2, x - (freq*2/3), y/2 - amplitude, x - (freq/3), y/2 + amplitude, x, y/2);
+			parent.stroke(0, 0, 0);
+			parent.strokeWeight(2);
+			freq *= i; 
+			parent.bezier(x, y, x + (freq/3), y - amp, x + (freq*2/3), y + amp, x + freq, y);
 			
 		}else{
 			// ASK
 			// increment the incoming integer so that 1 = 2 and 0 = 1, to be used as multiples for frequency
-			i++;
-			amp = amplitude * i;
-			parent.bezier(x-frequency, y, x - (frequency *3/4), y - amp, x - (frequency / 4), y + amp, x, y/2);
+			parent.stroke(0, 0, 0);
+			parent.strokeWeight(2);
+			amp /= i;
+			parent.bezier(x, y, x + (freq/3), y - amp, x + (freq*2/3), y + amp, x + freq, y);
 		}
 	}
 	
-	public void drawWave(int x, int y){
+	public void drawSineWave(float x, float y){
 		int index;
 		for( index = 0; index<binary.length(); index++){
 			int i = Character.getNumericValue(binary.charAt(index));
+			i++;
 			sineWave(i, x, y);
-			/*
-			 * take a look at the processing sketch that you did to finish the sineWave implementation.
-			 */
-			
+			if(shiftKey){
+				x += (frequency * i);
+			}else{
+				x += frequency;
+			}
 		}
 	}
+	
+	public void digitalWave(int i, float x, float y, boolean next){
+		parent.stroke(0, 0, 0);
+		parent.strokeWeight(2);
+		float h = amplitude/2;
+		float l = frequency;
+		
+		if(i == 0 && next){
+			parent.line(x, y, x+l, y);
+		}else if(i == 0 && !next){
+			parent.line(x, y, x+l, y);
+			parent.line(x+l, y, x+l, y-h);
+		}else if(i == 1 && next){
+			parent.line(x, y-h, x+l, y-h);
+		}else if (i == 1 && !next){
+			parent.line(x, y-h, x+l, y-h);
+			parent.line(x+l, y-h, x+l, y);
+		}
+	}
+	
+	public void drawDigitalWave(float x, float y){
+		int index;
+		boolean prev = false; //was the previous bit the same as the current
+		boolean next = false; // is the next bit the same
+		y += amplitude/4;
+		for(index = 0; index < binary.length(); index++){
+			int i = Character.getNumericValue(binary.charAt(index));
+			if (index < binary.length()-1){
+				if(binary.charAt(index) == binary.charAt(index+1)){
+					next = true;
+				}else{
+					next = false;
+				}
+			}
+			digitalWave(i, x, y, next);
+			x += frequency;
+		}
+	}
+
 }

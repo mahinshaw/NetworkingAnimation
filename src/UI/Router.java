@@ -41,6 +41,7 @@ public class Router extends Node {
 		parent.image(router, position.x, position.y);
 	}
 	
+	@SuppressWarnings("static-access")
 	public void output(Message m){
 		if (m.position.x >= (position.x - (width)) && m.position.x <= (position.x + (width))
 				&& m.position.y >= (position.y - (height / 2))
@@ -52,7 +53,8 @@ public class Router extends Node {
 			PFont f = parent.createFont("Georgia", 16, true);
 			parent.textFont(f);
 			parent.fill(225);
-			parent.rect(x, y, 600, 200);
+			parent.rect(x, y, parent.width, 200);
+			m.drawSineWave(0, y);
 		}
 	}
 }

@@ -41,6 +41,7 @@ public class Computer extends Node {
 		parent.image(computer, position.x, position.y);
 	}
 	
+	@SuppressWarnings("static-access")
 	public void output(Message m){
 		if (m.position.x >= (position.x - (width/2)) && m.position.x <= (position.x + (width/2))
 				&& m.position.y >= (position.y - (height / 2))
@@ -52,7 +53,8 @@ public class Computer extends Node {
 			PFont f = parent.createFont("Georgia", 16, true);
 			parent.textFont(f);
 			parent.fill(225);
-			parent.rect(x, y, 600, 200);
+			parent.rect(x, y, parent.width, 200);
+			m.drawDigitalWave(0, y);
 		}
 	}
 }
