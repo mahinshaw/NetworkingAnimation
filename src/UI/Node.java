@@ -111,7 +111,7 @@ public class Node {
 		}
 	}
 	
-	public void output(Message m){
+	public void output(Message m, int i){
 		
 	}
 }

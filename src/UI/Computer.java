@@ -42,7 +42,7 @@ public class Computer extends Node {
 	}
 	
 	@SuppressWarnings("static-access")
-	public void output(Message m){
+	public void output(Message m, int i){
 		if (m.position.x >= (position.x - (width/2)) && m.position.x <= (position.x + (width/2))
 				&& m.position.y >= (position.y - (height / 2))
 				&& m.position.y <= (position.y + (height / 2))){
@@ -54,7 +54,7 @@ public class Computer extends Node {
 			parent.textFont(f);
 			parent.fill(225);
 			parent.rect(x, y, parent.width, 200);
-			m.drawDigitalWave(0, y);
+			m.drawDigitalWave(i, y);
 		}
 	}
 }

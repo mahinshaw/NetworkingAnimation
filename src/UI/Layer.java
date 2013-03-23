@@ -110,7 +110,7 @@ public class Layer extends Node {
 	}
 
 	@SuppressWarnings("static-access")
-	public void output(Message m) {
+	public void output(Message m, int i) {
 		if (m.position.x == position.x
 				&& m.position.y > (position.y - (height / 2))
 				&& m.position.y <= (position.y + (height / 2))) {

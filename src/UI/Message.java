@@ -16,6 +16,9 @@ public class Message extends Node{
 
 	PVector start;
 	PVector end;
+	PVector ack;
+	PVector ackEnd;
+	PVector ackStart;
 	
 	private PVector speed;
 	
@@ -45,8 +48,8 @@ public class Message extends Node{
 		color = c;
 		message = m;
 		binary = calcBinary(message);
-		source = "192.168.1.1";
-		destination = "192.168.1.158";
+		source = "72.76.5.32";
+		destination = "74.188.4.158";
 		destMAC = "04:8F:F2:23";
 		sourMAC = "06:4C:F3:4B";
 		type = "21";
@@ -55,7 +58,8 @@ public class Message extends Node{
 		sfd = "10101011";
 		frequency = 9;
 		amplitude = 200;
-		shiftKey = false; // default = fsk
+		shiftKey = true; // default = fsk
+		
 	}
 	
 	public Message(PApplet p, PVector v, float w, float h, int c, String m) {
@@ -77,7 +81,8 @@ public class Message extends Node{
 		sfd = "10101011";
 		frequency = 9;
 		amplitude = 200;
-		shiftKey = false; // default = fsk
+		shiftKey = true; // default = fsk
+		
 	}
 	
 	/*
@@ -130,6 +135,7 @@ public class Message extends Node{
 	
 	public void setMessage(String m){
 		message = m;
+		setBinary(message);
 	}
 	
 	public String className(){
@@ -180,6 +186,18 @@ public class Message extends Node{
 		return frequency;
 	}
 	
+	public PVector getACK(){
+		return ack;
+	}
+	
+	public PVector getACKEnd(){
+		return ackEnd;
+	}
+	
+	public PVector getACKStart(){
+		return ackStart;
+	}
+	
 	public void setSource(String s){
 		source = s;
 	}
@@ -213,7 +231,7 @@ public class Message extends Node{
 	}
 	
 	public void setBinary(String m){
-		binary = calcBinary(m);
+		binary = preamble + sfd + calcBinary(m);
 	}
 	
 	public void setAmplitude(int a){
@@ -226,6 +244,18 @@ public class Message extends Node{
 
 	public void setShiftKey(boolean s){
 		shiftKey = s;
+	}
+	
+	public void setACK(PVector v){
+		ack = v.get();
+	}
+	
+	public void setACKEnd(PVector v){
+		ackEnd = v.get();
+	}
+	
+	public void setACKStart(PVector v){
+		ackStart = v.get();
 	}
 	/*
 	 * end get and set methods
@@ -255,25 +285,34 @@ public class Message extends Node{
 	 * @param x and y -  this will be in the width and height of the rectangle to draw sine waves inside of
 	 * @param i - this will be the bit value passed in from the String of bits(most likely the binary variable 
 	 */
+	@SuppressWarnings("static-access")
 	public void sineWave(int i, float x, float y){
+		PFont f = parent.createFont("Georgia", 16, true);
+		parent.textFont(f);
+		parent.textAlign(parent.CENTER, parent.CENTER);
+		parent.stroke(0, 0, 0);
+		parent.strokeWeight(1);
 		
 		float freq = frequency;
 		float amp = amplitude;
 		if (shiftKey){
 			// FSK
 			// increment the incoming integer so that 1 = 2 and 0 = 1, to be used as multiples for frequency
-			parent.stroke(0, 0, 0);
-			parent.strokeWeight(2);
+			parent.fill(255, 0, 0);
+			parent.text(i-1, x+freq*i/2, y + 85);
 			freq *= i; 
+			parent.fill(225);
 			parent.bezier(x, y, x + (freq/3), y - amp, x + (freq*2/3), y + amp, x + freq, y);
 			
 		}else{
 			// ASK
-			// increment the incoming integer so that 1 = 2 and 0 = 1, to be used as multiples for frequency
-			parent.stroke(0, 0, 0);
-			parent.strokeWeight(2);
-			amp /= i;
+			// increment the incoming integer so that 1 = 2 and 0 = 1, to be used as divisors for amplitude
+			parent.fill(255, 0, 0);
+			parent.text(i-1, x+freq/2, y + 85);
+			amp /= i; 
+			parent.fill(225);
 			parent.bezier(x, y, x + (freq/3), y - amp, x + (freq*2/3), y + amp, x + freq, y);
+					
 		}
 	}
 	
@@ -291,30 +330,42 @@ public class Message extends Node{
 		}
 	}
 	
+	@SuppressWarnings("static-access")
 	public void digitalWave(int i, float x, float y, boolean next){
 		parent.stroke(0, 0, 0);
-		parent.strokeWeight(2);
+		parent.strokeWeight(1);
+		PFont f = parent.createFont("Georgia", 16, true);
+		parent.textFont(f);
+		parent.textAlign(parent.CENTER, parent.CENTER);
+		
 		float h = amplitude/2;
 		float l = frequency;
 		
 		if(i == 0 && next){
 			parent.line(x, y, x+l, y);
+			parent.fill(255, 0, 0);
+			parent.text(i, x+l/2, y+30);
 		}else if(i == 0 && !next){
 			parent.line(x, y, x+l, y);
 			parent.line(x+l, y, x+l, y-h);
+			parent.fill(255, 0, 0);
+			parent.text(i, x+l/2, y+30);
 		}else if(i == 1 && next){
 			parent.line(x, y-h, x+l, y-h);
+			parent.fill(255, 0, 0);
+			parent.text(i, x+l/2, y+30);
 		}else if (i == 1 && !next){
 			parent.line(x, y-h, x+l, y-h);
 			parent.line(x+l, y-h, x+l, y);
+			parent.fill(255, 0, 0);
+			parent.text(i, x+l/2, y+30);
 		}
 	}
 	
 	public void drawDigitalWave(float x, float y){
 		int index;
-		boolean prev = false; //was the previous bit the same as the current
 		boolean next = false; // is the next bit the same
-		y += amplitude/4;
+		y += (amplitude/4);
 		for(index = 0; index < binary.length(); index++){
 			int i = Character.getNumericValue(binary.charAt(index));
 			if (index < binary.length()-1){
@@ -329,4 +380,10 @@ public class Message extends Node{
 		}
 	}
 
+	public void displayACK(){
+		parent.fill(color);
+		parent.strokeWeight(1);
+		parent.ellipse(ack.x, ack.y, width/2, height/2);
+	}
+	
 }
