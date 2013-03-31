@@ -27,7 +27,9 @@ public class Message extends Node{
 	private String source;
 	private String destination;
 	private String destMAC;
+	private String destinationMAC;
 	private String sourMAC;
+	private String sourceMAC;
 	private String type;
 	private String crc;
 	private String preamble;
@@ -51,7 +53,9 @@ public class Message extends Node{
 		source = "72.76.5.32";
 		destination = "74.188.4.158";
 		destMAC = "04:8F:F2:23";
+		destinationMAC = "00000100100011111111001000100011";
 		sourMAC = "06:4C:F3:4B";
+		sourceMAC = "00000110010011001111001101001011";
 		type = "21";
 		crc = "";
 		preamble = "101010101010101010101010101010101010101010";
@@ -74,7 +78,9 @@ public class Message extends Node{
 		source = "192.168.1.1";
 		destination = "192.168.1.158";
 		destMAC = "04:8F:F2:23";
+		destinationMAC = "00000100100011111111001000100011";
 		sourMAC = "06:4C:F3:4B";
+		sourceMAC = "00000110010011001111001101001011";
 		type = "21";
 		crc = "";
 		preamble = "101010101010101010101010101010101010101010";
@@ -231,7 +237,7 @@ public class Message extends Node{
 	}
 	
 	public void setBinary(String m){
-		binary = preamble + sfd + calcBinary(m);
+		binary = preamble + sfd + destinationMAC + sourceMAC + calcBinary(m);
 	}
 	
 	public void setAmplitude(int a){
@@ -309,7 +315,7 @@ public class Message extends Node{
 			// increment the incoming integer so that 1 = 2 and 0 = 1, to be used as divisors for amplitude
 			parent.fill(255, 0, 0);
 			parent.text(i-1, x+freq/2, y + 85);
-			amp /= i; 
+			amp *= (i-1); 
 			parent.fill(225);
 			parent.bezier(x, y, x + (freq/3), y - amp, x + (freq*2/3), y + amp, x + freq, y);
 					

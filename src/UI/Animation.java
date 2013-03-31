@@ -445,6 +445,7 @@ public class Animation extends PApplet {
 			m1.setMessage(message1);
 			g1.travel(isStart, isPaused);
 			g1.output(i);
+			//i--;
 			if(g1.message.position.equals(end.position)){
 				Stop();
 				g1Move = false;
@@ -454,6 +455,7 @@ public class Animation extends PApplet {
 			m2.setMessage(message2);
 			g2.travel(isStart, isPaused);
 			g2.output(j);
+			//j--;
 			if(g2.message.position.equals(end2.position)){
 				Stop();
 				g1Move = true;
