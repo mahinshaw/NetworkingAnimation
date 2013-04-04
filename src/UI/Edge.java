@@ -15,6 +15,7 @@ public class Edge {
 		parent = p;
 		start = s;
 		end = e;
+		weight = 1;
 		color = parent.color(0, 0, 0 );
 	}
 	

@@ -22,12 +22,14 @@ public class Node {
 	float width, height;
 	ArrayList<Edge> edges;
 	int edgeCount;
+	int distance;
 	
 	public Node(PApplet p){
 		parent = p;
 		position = new PVector();
 		edges = new ArrayList<Edge>();
 		edgeCount = 0;
+		distance = 1000000;
 	}
 	
 	public Node(PApplet p, PVector v){
@@ -82,6 +84,14 @@ public class Node {
 	
 	public void setHeight(float h){
 		height = h;
+	}
+	
+	public int getDistance(){
+		return distance;
+	}
+	
+	public void setDistance(int d){
+		distance = d;
 	}
 	
 	public String className(){

@@ -41,6 +41,16 @@ public class Graph {
 		}
 	}
 	
+	/*
+	 * need to finish the shortest path implementation
+	 */
+	public void shortestPath(Node start){
+		Node current = start;
+		while(current.edgeCount > 0){
+			
+		}
+	}
+	
 	public void sendACK(){
 		if(nodes.get(currentNode).className().equals("Router")  && nodes.get(currentNode-1).className().equals("Router")){
 			ackSent = false;
