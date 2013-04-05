@@ -46,6 +46,14 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.idea/
+*.iml
+*.iws
+.DS_Store
+log/
+target/
+out/
+*.db
 
 # External tool builders
 .externalToolBuilders/
