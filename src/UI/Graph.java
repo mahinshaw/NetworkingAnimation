@@ -3,6 +3,16 @@ package UI;
 import java.util.ArrayList;
 import processing.core.*;
 
+/*
+ * @ author: Mark Hinshaw
+ * @ email: mahinshaw@gmail.com
+ * @ github: https://github.com/mahinshaw/NetworkingAnimation.git
+ *
+ * This class is a message that travels from location to location.  This method will contain all the information needed for display within the message.
+ * All calculations are done locally and can be called for use in other classes.
+ *
+ */
+
 public class Graph {
 	
 	PApplet parent;
@@ -40,15 +50,37 @@ public class Graph {
 			}
 		}
 	}
+
+    public ArrayList<Node> getSuccessors(Node n){
+        ArrayList<Node> successors = new ArrayList<>();
+        for (Edge e : n.edges){
+            successors.add(e.end);
+        }
+        return successors;
+    }
+
+
+    public int getDistance(Node n, Node m){
+        /*
+        there is a better way to do this, WORK ON IT!!!!!!!!
+         */
+
+        int distance = Integer.MAX_VALUE;
+
+        for (Edge e : n.getEdges()){
+            if(e.end == m){
+                distance = e.getWeight();
+            }
+        }
+        return distance;
+    }
 	
 	/*
 	 * need to finish the shortest path implementation
 	 */
-	public void shortestPath(Node start){
-		Node current = start;
-		while(current.edgeCount > 0){
-			
-		}
+	public void shortestPath(Node start, Node finish){
+		ShortestPath route = new ShortestPath(this);
+        route.execute(start, finish);
 	}
 	
 	public void sendACK(){

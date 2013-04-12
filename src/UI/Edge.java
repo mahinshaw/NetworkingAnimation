@@ -2,6 +2,16 @@ package UI;
 
 import processing.core.*;
 
+/*
+ * @ author: Mark Hinshaw
+ * @ email: mahinshaw@gmail.com
+ * @ github: https://github.com/mahinshaw/NetworkingAnimation.git
+ *
+ * This class is a message that travels from location to location.  This method will contain all the information needed for display within the message.
+ * All calculations are done locally and can be called for use in other classes.
+ *
+ */
+
 public class Edge {
 	
 	private PApplet parent;
