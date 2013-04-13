@@ -280,36 +280,7 @@ public class Animation extends PApplet {
 		m2.setDestination("174.15.121.5");
 		m2.setDestMAC("62:FE:36:A5");
 		
-		/* initialize graph
-		g1 = new Graph(this, m1);
-		g1.addNode(start);
-		g1.addNode(al1);
-		g1.addNode(pl1);
-		g1.addNode(sl1);
-		g1.addNode(tl1);
-		g1.addNode(nl1);
-		g1.addNode(dl1);
-		g1.addNode(hl1);
-		g1.addNode(c1);
-		g1.addNode(r1);
-		g1.addNode(r2);
-		g1.addNode(r3);
-		g1.addNode(r4);
-		g1.addNode(r5);
-		g1.addNode(r6);
-		g1.addNode(r7);
-		g1.addNode(r8);
-		g1.addNode(c2);
-		g1.addNode(hl2);
-		g1.addNode(dl2);
-		g1.addNode(nl2);
-		g1.addNode(tl2);
-		g1.addNode(sl2);
-		g1.addNode(pl2);
-		g1.addNode(al2);
-		g1.addNode(end);
-		*/
-
+        // initialize the graph and assign the shortest path
         g1 = new Graph(this, m1);
         g1.shortestPath(start, end);
 	}

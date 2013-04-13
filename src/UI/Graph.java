@@ -81,16 +81,10 @@ public class Graph {
         route.execute(start, finish);
 
         for (Node n = finish; n != null; n = route.getPredecessor(n)){
-            nodes.add(n);
-            //System.out.println("Predecessor: " + route.getPredecessor(n).getOrder());
-            System.out.println("Added node: " + n.getOrder());
+            addNode(n);
         }
 
         Collections.reverse(nodes);
-
-        for (int i = 0; i <nodes.size(); i++){
-            System.out.println("Node: "+ nodes.get(i).getOrder());
-        }
     }
 	
 	public void sendACK(){

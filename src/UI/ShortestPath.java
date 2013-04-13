@@ -67,7 +67,7 @@ public class ShortestPath {
 
         while((n = unsettledNodes.poll()) != null){
             assert !isSettled(n);
-            //System.out.println("Settling");
+
             if (n == end) break;
 
             settledNodes.add(n);
@@ -85,7 +85,6 @@ public class ShortestPath {
             if (shortDist < getShortestDistance(n)){
                 setShortestDistance(n, shortDist);
                 setPredecessor(n, m);
-                //System.out.println("Predecessor set: " + n.getOrder());
             }
         }
     }
