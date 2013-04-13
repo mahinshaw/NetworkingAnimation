@@ -1,6 +1,8 @@
 package UI;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import processing.core.*;
 
 /*
@@ -52,11 +54,7 @@ public class Graph {
 	}
 
     public ArrayList<Node> getSuccessors(Node n){
-        ArrayList<Node> successors = new ArrayList<>();
-        for (Edge e : n.edges){
-            successors.add(e.end);
-        }
-        return successors;
+        return n.successors;
     }
 
 
@@ -68,7 +66,7 @@ public class Graph {
         int distance = Integer.MAX_VALUE;
 
         for (Edge e : n.getEdges()){
-            if(e.end == m){
+            if(e.end.equals(m)){
                 distance = e.getWeight();
             }
         }
@@ -81,7 +79,19 @@ public class Graph {
 	public void shortestPath(Node start, Node finish){
 		ShortestPath route = new ShortestPath(this);
         route.execute(start, finish);
-	}
+
+        for (Node n = finish; n != null; n = route.getPredecessor(n)){
+            nodes.add(n);
+            //System.out.println("Predecessor: " + route.getPredecessor(n).getOrder());
+            System.out.println("Added node: " + n.getOrder());
+        }
+
+        Collections.reverse(nodes);
+
+        for (int i = 0; i <nodes.size(); i++){
+            System.out.println("Node: "+ nodes.get(i).getOrder());
+        }
+    }
 	
 	public void sendACK(){
 		if(nodes.get(currentNode).className().equals("Router")  && nodes.get(currentNode-1).className().equals("Router")){
@@ -106,56 +116,55 @@ public class Graph {
 	}
 	
 	public void drive(){
-		PVector slope = new PVector();
-		slope = PVector.sub(message.end, message.start);
+		PVector slope = PVector.sub(message.end, message.start);
 		slope.normalize();
 		if (slope.x == 0 && slope.y > 0){
 			if (message.position.y < message.end.y){
 				slope = PVector.mult(slope, vertSpeed);
 				message.position.add(slope);
 			}else{
-				message.setACK(message.getEnd());
-				message.setACKStart(message.getEnd());
-				message.setACKEnd(message.getStart());
+				message.setACK(message.end);
+				message.setACKStart(message.end);
+				message.setACKEnd(message.start);
 				currentNode++;
 				sendACK();
-				message.setVector(nodes.get(currentNode).position);
+				message.setPosition(nodes.get(currentNode).position);
 			}
 		}else if (slope.x > 0 && slope.y == 0){
 			if (message.position.x < message.end.x){
 				slope = PVector.mult(slope, horizSpeed);
 				message.position.add(slope);
 			}else{
-				message.setACK(message.getEnd());
-				message.setACKStart(message.getEnd());
-				message.setACKEnd(message.getStart());
+				message.setACK(message.end);
+				message.setACKStart(message.end);
+				message.setACKEnd(message.start);
 				currentNode++;
 				sendACK();
-				message.setVector(nodes.get(currentNode).position);
+				message.setPosition(nodes.get(currentNode).position);
 			}
 		}else if (slope.x == 0 && slope.y < 0){
 			if (message.position.y > message.end.y){
 				slope = PVector.mult(slope, vertSpeed);
 				message.position.add(slope);
 			}else{
-				message.setACK(message.getEnd());
-				message.setACKStart(message.getEnd());
-				message.setACKEnd(message.getStart());
+				message.setACK(message.end);
+				message.setACKStart(message.end);
+				message.setACKEnd(message.start);
 				currentNode++;
 				sendACK();
-				message.setVector(nodes.get(currentNode).position);
+				message.setPosition(nodes.get(currentNode).position);
 			}
 		}else if (slope.x > 0 && slope.y != 0){
 			if (message.position.x < message.end.x){
 				slope = PVector.mult(slope, horizSpeed);
 				message.position.add(slope);
 			}else{
-				message.setACK(message.getEnd());
-				message.setACKStart(message.getEnd());
-				message.setACKEnd(message.getStart());
+				message.setACK(message.end);
+				message.setACKStart(message.end);
+				message.setACKEnd(message.start);
 				currentNode++;
 				sendACK();
-				message.setVector(nodes.get(currentNode).position);
+				message.setPosition(nodes.get(currentNode).position);
 			}
 		}		
 	}

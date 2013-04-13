@@ -14,16 +14,16 @@ public class Router extends Node {
 
 	PImage router;
 	
-	public Router(PApplet p, float x, float y, float w, float h) {
-		super(p);
+	public Router(PApplet p, int o, float x, float y, float w, float h) {
+		super(p, o);
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
 		router = parent.loadImage("Router1.jpg");
 	}
 	
-	public Router(PApplet p, PVector v, float w, float h) {
-		super(p);
+	public Router(PApplet p, int o, PVector v, float w, float h) {
+		super(p, o);
 		super.setVector(v);
 		super.setWidth(w);
 		super.setHeight(h);

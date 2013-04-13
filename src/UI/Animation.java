@@ -96,8 +96,8 @@ public class Animation extends PApplet {
 		// set the begin location -- animation starts with start button
 		PVector v1 = new PVector((width / 8), map(160, 0, 900, 0, height));
 		PVector v2 = new PVector((width / 8) * 7, map(160, 0, 900, 0, height));
-		start = new Node(this, v1);
-		end = new Node(this, v2);
+		start = new Node(this, 0, v1);
+		end = new Node(this, 25, v2);
 		
 		// intitialize the controller 
 		controller = new ControlP5(this);
@@ -205,35 +205,35 @@ public class Animation extends PApplet {
 		selectColor = color(0, 255, 0);	// green
 		
 		// initialize layer classes
-		al1 = new Layer(this, AL1, rectW, rectH, "Application Layer", layerColor);
-		al2 = new Layer(this, AL2, rectW, rectH, "Application Layer", layerColor);
-		sl1 = new Layer(this, SL1, rectW, rectH, "Session Layer", layerColor);
-		sl2 = new Layer(this, SL2, rectW, rectH, "Session Layer", layerColor);
-		pl1 = new Layer(this, PL1, rectW, rectH, "Presentation Layer", layerColor);
-		pl2 = new Layer(this, PL2, rectW, rectH, "Presentation Layer", layerColor);
-		nl1 = new Layer(this, NL1, rectW, rectH, "Network Layer", layerColor);
-		nl2 = new Layer(this, NL2, rectW, rectH, "Network Layer", layerColor);
-		tl1 = new Layer(this, TL1, rectW, rectH, "Transportation Layer", layerColor);
-		tl2 = new Layer(this, TL2, rectW, rectH, "Transportation Layer", layerColor);
-		dl1 = new Layer(this, DL1, rectW, rectH, "Data Link Layer", layerColor);
-		dl2 = new Layer(this, DL2, rectW, rectH, "Data Link Layer", layerColor);
-		hl1 = new Layer(this, HL1, rectW, rectH, "Physical Layer", layerColor);
-		hl2 = new Layer(this, HL2, rectW, rectH, "Physical Layer", layerColor);
+		al1 = new Layer(this, 1, AL1, rectW, rectH, "Application Layer", layerColor);
+		al2 = new Layer(this, 24, AL2, rectW, rectH, "Application Layer", layerColor);
+        pl1 = new Layer(this, 2, PL1, rectW, rectH, "Presentation Layer", layerColor);
+        pl2 = new Layer(this, 23, PL2, rectW, rectH, "Presentation Layer", layerColor);
+        sl1 = new Layer(this, 3, SL1, rectW, rectH, "Session Layer", layerColor);
+        sl2 = new Layer(this, 22, SL2, rectW, rectH, "Session Layer", layerColor);
+        nl1 = new Layer(this, 4, NL1, rectW, rectH, "Network Layer", layerColor);
+		nl2 = new Layer(this, 21, NL2, rectW, rectH, "Network Layer", layerColor);
+		tl1 = new Layer(this, 5, TL1, rectW, rectH, "Transportation Layer", layerColor);
+		tl2 = new Layer(this, 20, TL2, rectW, rectH, "Transportation Layer", layerColor);
+		dl1 = new Layer(this, 6, DL1, rectW, rectH, "Data Link Layer", layerColor);
+		dl2 = new Layer(this, 19, DL2, rectW, rectH, "Data Link Layer", layerColor);
+		hl1 = new Layer(this, 7, HL1, rectW, rectH, "Physical Layer", layerColor);
+		hl2 = new Layer(this, 18, HL2, rectW, rectH, "Physical Layer", layerColor);
 		
 		
 		//initialize Computer classes
-		c1 = new Computer(this, C1, 50, 50);
-		c2 = new Computer(this, C2, 50, 50);
+		c1 = new Computer(this, 8, C1, 50, 50);
+		c2 = new Computer(this, 17, C2, 50, 50);
 		
 		//initialize Router classes
-		r1 = new Router(this, R1, 40, 40);
-		r2 = new Router(this, R2, 40, 40);
-		r3 = new Router(this, R3, 40, 40);
-		r4 = new Router(this, R4, 40, 40);
-		r5 = new Router(this, R5, 40, 40);
-		r6 = new Router(this, R6, 40, 40);
-		r7 = new Router(this, R7, 40, 40);
-		r8 = new Router(this, R8, 40, 40);
+		r1 = new Router(this, 9, R1, 40, 40);
+		r2 = new Router(this, 10, R2, 40, 40);
+		r3 = new Router(this, 11, R3, 40, 40);
+		r4 = new Router(this, 12, R4, 40, 40);
+		r5 = new Router(this, 13, R5, 40, 40);
+		r6 = new Router(this, 14, R6, 40, 40);
+		r7 = new Router(this, 15, R7, 40, 40);
+		r8 = new Router(this, 16, R8, 40, 40);
 		
 		// add edges
 		start.addEdge(al1);
@@ -245,25 +245,25 @@ public class Animation extends PApplet {
 		dl1.addEdge(hl1);
 		hl1.addEdge(c1);
 		c1.addEdge(r1);
-		r1.addEdge(r2);
-		r1.addEdge(r7);
-		r2.addEdge(r3);
-		r2.addEdge(r5);
-		r3.addEdge(r4);
+		r1.addEdge(r2, 7);
+		r1.addEdge(r7, 5);
+		r2.addEdge(r3, 3);
+		r2.addEdge(r5, 2);
+		r3.addEdge(r4, 5);
 		r4.addEdge(c2);
-		r5.addEdge(r6);
-		r6.addEdge(r3);
-		r6.addEdge(r8);
-		r7.addEdge(r5);
-		r7.addEdge(r8);
-		r8.addEdge(r4);
+		r5.addEdge(r6, 3);
+		r6.addEdge(r3, 6);
+		r6.addEdge(r8, 2);
+		r7.addEdge(r5, 4);
+		r7.addEdge(r8, 5);
+		r8.addEdge(r4, 3);
 		c2.addEdge(hl2);
 		hl2.addEdge(dl2);
 		dl2.addEdge(nl2);
 		nl2.addEdge(tl2);
 		tl2.addEdge(sl2);
 		sl2.addEdge(pl2);
-		pl2.addEdge(sl2);
+		pl2.addEdge(al2);
 		al2.addEdge(end);
 		
 		// initialize message colors
@@ -280,7 +280,7 @@ public class Animation extends PApplet {
 		m2.setDestination("174.15.121.5");
 		m2.setDestMAC("62:FE:36:A5");
 		
-		// initialize graph
+		/* initialize graph
 		g1 = new Graph(this, m1);
 		g1.addNode(start);
 		g1.addNode(al1);
@@ -308,7 +308,10 @@ public class Animation extends PApplet {
 		g1.addNode(pl2);
 		g1.addNode(al2);
 		g1.addNode(end);
-		
+		*/
+
+        g1 = new Graph(this, m1);
+        g1.shortestPath(start, end);
 	}
 
 	public void draw() {
@@ -395,9 +398,9 @@ public class Animation extends PApplet {
 		if(!value){
 			controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Pause");
 			if(!isPaused && !isStart){
-				m1.setVector(start.position);				
+				m1.setPosition(start.position);
 				g1.setCurrentNode(0);
-				m2.setVector(start.position);
+				m2.setPosition(start.position);
 				isStart = true;
 			}else if(isPaused && isStart){
 				isPaused = false;
@@ -433,8 +436,8 @@ public class Animation extends PApplet {
 			isStart = false;
 			isPaused = false;
 			controller.get(Toggle.class, "Start_Pause").setValue(true);
-			m1.setVector(start.position);
-			m2.setVector(start.position);
+			m1.setPosition(start.position);
+			m2.setPosition(start.position);
 		}
 	}
 }

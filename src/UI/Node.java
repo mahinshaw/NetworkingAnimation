@@ -16,29 +16,31 @@ import processing.core.*;
  * @ w, h - width and height.
  * 
  */
-public class Node {
+public class Node implements Comparable<Node> {
 	PApplet parent;
 	PVector position;
 	float width, height;
-	ArrayList<Edge> edges;
+	ArrayList<Edge> edges = new ArrayList<Edge>();
+    ArrayList<Node> successors = new ArrayList<Node>();
 	int edgeCount;
-	int distance;
+    private final int order;
 	
-	public Node(PApplet p){
+	public Node(PApplet p, int o){
 		parent = p;
 		position = new PVector();
-		edges = new ArrayList<Edge>();
+        successors.clear();
 		edgeCount = 0;
-		distance = 1000000;
+		order = o;
 	}
 	
-	public Node(PApplet p, PVector v){
+	public Node(PApplet p, int o, PVector v){
 		parent = p;
 		position = new PVector(v.x, v.y);
-		edges = new ArrayList<Edge>();
+        successors.clear();
 		width = 0;
 		height = 0;
 		edgeCount = 0;
+        order = o;
 	}
 	
 	public PVector getVector(){
@@ -86,12 +88,8 @@ public class Node {
 		height = h;
 	}
 	
-	public int getDistance(){
-		return distance;
-	}
-	
-	public void setDistance(int d){
-		distance = d;
+	public int getOrder(){
+		return order;
 	}
 	
 	public String className(){
@@ -105,8 +103,16 @@ public class Node {
 	public void addEdge(Node n){
 		Edge e = new Edge(parent, this, n);
 		edges.add(e);
+        successors.add(n);
 		edgeCount++;
 	}
+
+    public void addEdge(Node n, int w){
+        Edge e = new Edge(parent, this, n, w);
+        edges.add(e);
+        successors.add(n);
+        edgeCount++;
+    }
 	
 	public int edgeCount(){
 		return edgeCount;
@@ -124,4 +130,9 @@ public class Node {
 	public void output(Message m, int i){
 		
 	}
+
+    @Override
+    public int compareTo(Node n) {
+        return this.order - n.order;
+    }
 }

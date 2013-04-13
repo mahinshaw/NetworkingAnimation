@@ -12,9 +12,12 @@ import processing.core.*;
  * 
  */
 
-public class Message extends Node{
+public class Message {
+    private PApplet parent;
 
-	PVector start;
+	private float width, height;
+    PVector position;
+    PVector start;
 	PVector end;
 	PVector ack;
 	PVector ackEnd;
@@ -42,10 +45,11 @@ public class Message extends Node{
 	int color;
 	
 	public Message(PApplet p, float x, float y, float w, float h, int c, String m) {
-		super(p);
-		setVector(x, y);
-		setWidth(w);
-		setHeight(h);
+		parent = p;
+		position.x = x;
+        position.y = y;
+        width = w;
+        height = h;
 		speed = new PVector((float)0.05, (float)0.05);
 		color = c;
 		message = m;
@@ -67,11 +71,11 @@ public class Message extends Node{
 	}
 	
 	public Message(PApplet p, PVector v, float w, float h, int c, String m) {
-		super(p);
-		setVector(v);
-		setWidth(w);
-		setHeight(h);
-		speed = new PVector((float)0.05, (float)0.05);
+		parent = p;
+        position = v.get();
+        width = w;
+        height = h;
+        speed = new PVector((float)0.05, (float)0.05);
 		color = c;
 		message = m;
 		binary = calcBinary(message);
@@ -94,19 +98,15 @@ public class Message extends Node{
 	/*
 	 * begin get and set methods for global variables
 	 */
-	public PVector getStart(){
-		return start;
-	}
-	
-	public void setStart(PVector v){
+	public void setPosition(PVector p){
+        position = p.get();
+    }
+
+    public void setStart(PVector v){
 		start = v.get();
 	}
-	
-	public PVector getEnd(){
-		return end;
-	}
-	
-	public void setEnd(PVector v){
+
+    public void setEnd(PVector v){
 		end = v.get();
 	}
 	
@@ -142,10 +142,6 @@ public class Message extends Node{
 	public void setMessage(String m){
 		message = m;
 		setBinary(message);
-	}
-	
-	public String className(){
-		return "Message";
 	}
 	
 	public String getSource(){

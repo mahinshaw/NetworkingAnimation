@@ -25,9 +25,17 @@ public class Edge {
 		parent = p;
 		start = s;
 		end = e;
-		weight = 1;
+		weight = 0;
 		color = parent.color(0, 0, 0 );
 	}
+
+    public Edge(PApplet p, Node s, Node e, int w){
+        parent = p;
+        start = s;
+        end = e;
+        weight = w;
+        color = parent.color(0, 0, 0 );
+    }
 	
 	public int getWeight(){
 		return weight;

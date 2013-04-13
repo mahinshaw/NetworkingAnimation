@@ -19,8 +19,8 @@ import java.util.Set;
 
 public class ShortestPath {
 
-    public static final int INFINITY = Integer.MAX_VALUE;
-    private static final int INITIAL_VALUE = 24;
+    public static final int HIGH_VALUE = 10000;
+    private static final int INITIAL_VALUE = 26;
 
     private final Graph map;
 
@@ -30,7 +30,7 @@ public class ShortestPath {
         {
             int result = getShortestDistance(left) - getShortestDistance(right);
 
-            return result; //(result == 0) ? left.compareTo(right) : result;
+            return (result == 0) ? left.compareTo(right) : result;
         }
     };
 
@@ -67,6 +67,7 @@ public class ShortestPath {
 
         while((n = unsettledNodes.poll()) != null){
             assert !isSettled(n);
+            //System.out.println("Settling");
             if (n == end) break;
 
             settledNodes.add(n);
@@ -75,15 +76,16 @@ public class ShortestPath {
         }
     }
 
-    public void relaxNeighbors(Node n){
-        for (Node m : map.getSuccessors(n)){
-            if (isSettled(m)) continue;
+    public void relaxNeighbors(Node m){
+        for (Node n : map.getSuccessors(m)){
+            if (isSettled(n)) continue;
 
-            int shortDist = getShortestDistance(n) + map.getDistance(n, m);
+            int shortDist = getShortestDistance(m) + map.getDistance(m, n);
 
-            if (shortDist < getShortestDistance(m)){
-                setShortestDistance(m, shortDist);
-                setPredecessor(m, n);
+            if (shortDist < getShortestDistance(n)){
+                setShortestDistance(n, shortDist);
+                setPredecessor(n, m);
+                //System.out.println("Predecessor set: " + n.getOrder());
             }
         }
     }
@@ -94,7 +96,7 @@ public class ShortestPath {
 
     private int getShortestDistance(Node n){
         Integer d = shortestDistances.get(n);
-        return (d == null) ? INFINITY : d;
+        return (d == null) ? HIGH_VALUE : d;
     }
     private void setShortestDistance(Node n, int dist){
         unsettledNodes.remove(n);
@@ -102,7 +104,7 @@ public class ShortestPath {
         unsettledNodes.add(n);
     }
 
-    private Node getPredecessor(Node n){
+    public Node getPredecessor(Node n){
         return predecessors.get(n);
     }
 

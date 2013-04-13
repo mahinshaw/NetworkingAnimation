@@ -19,8 +19,8 @@ public class Layer extends Node {
 	boolean aa;
 	PFont f;
 
-	public Layer(PApplet p, float x, float y, float w, float h, String t, int c) {
-		super(p);
+	public Layer(PApplet p, int o, float x, float y, float w, float h, String t, int c) {
+		super(p, o);
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
@@ -32,8 +32,8 @@ public class Layer extends Node {
 		color = c;
 	}
 
-	public Layer(PApplet p, PVector v, float w, float h, String t, int c) {
-		super(p);
+	public Layer(PApplet p, int o, PVector v, float w, float h, String t, int c) {
+		super(p, o);
 		super.setVector(v);
 		super.setWidth(w);
 		super.setHeight(h);

@@ -14,16 +14,16 @@ public class Computer extends Node {
 	
 	PImage computer;
 
-	public Computer(PApplet p, float x, float y, float w, float h) {
-		super(p);
+	public Computer(PApplet p, int o, float x, float y, float w, float h) {
+		super(p, o);
 		super.setVector(x, y);
 		super.setWidth(w);
 		super.setHeight(h);
 		computer = parent.loadImage("Computer1.jpg");
 	}
 	
-	public Computer(PApplet p, PVector v, float w, float h) {
-		super(p);
+	public Computer(PApplet p, int o, PVector v, float w, float h) {
+		super(p, o);
 		super.setVector(v);
 		super.setWidth(w);
 		super.setHeight(h);
