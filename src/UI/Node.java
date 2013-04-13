@@ -99,6 +99,15 @@ public class Node implements Comparable<Node> {
 	public ArrayList<Edge> getEdges(){
 		return edges;
 	}
+
+    public Edge getEdge(Node end){
+        Edge f = new Edge(parent, this, end);
+        for (Edge e : edges){
+            if (e.start == this && e.end == end)
+                f = e;
+        }
+        return f;
+    }
 	
 	public void addEdge(Node n){
 		Edge e = new Edge(parent, this, n);
