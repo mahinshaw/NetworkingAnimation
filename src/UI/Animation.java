@@ -46,7 +46,6 @@ public class Animation extends PApplet {
     String message1, message2;
 
     // declare the variables used for navigating the network
-    PVector loc;
     Node start, end;
 
     // declare location variables for layers
@@ -65,7 +64,7 @@ public class Animation extends PApplet {
 
     // declare the Graph
     Graph g1;
-
+    Graph g2;
 
     // declare variable for font
     PFont f;
@@ -368,35 +367,35 @@ public class Animation extends PApplet {
         r8 = new Router(this, 16, R8, 40, 40);
 
         // add edges
-        start.addEdge(al1);
-        al1.addEdge(pl1);
-        pl1.addEdge(sl1);
-        sl1.addEdge(tl1);
-        tl1.addEdge(nl1);
-        nl1.addEdge(dl1);
-        dl1.addEdge(hl1);
-        hl1.addEdge(c1);
-        c1.addEdge(r1);
-        r1.addEdge(r2, 7);
-        r1.addEdge(r7, 5);
-        r2.addEdge(r3, 3);
-        r2.addEdge(r5, 2);
-        r3.addEdge(r4, 5);
-        r4.addEdge(c2);
-        r5.addEdge(r6, 3);
-        r6.addEdge(r3, 6);
-        r6.addEdge(r8, 2);
-        r7.addEdge(r5, 4);
-        r7.addEdge(r8, 5);
-        r8.addEdge(r4, 3);
-        c2.addEdge(hl2);
-        hl2.addEdge(dl2);
-        dl2.addEdge(nl2);
-        nl2.addEdge(tl2);
-        tl2.addEdge(sl2);
-        sl2.addEdge(pl2);
-        pl2.addEdge(al2);
-        al2.addEdge(end);
+        start.addEdge(al1, 1);
+        al1.addEdge(pl1, 1);
+        pl1.addEdge(sl1, 1);
+        sl1.addEdge(tl1, 1);
+        tl1.addEdge(nl1, 1);
+        nl1.addEdge(dl1, 1);
+        dl1.addEdge(hl1, 1);
+        hl1.addEdge(c1, 1);
+        c1.addEdge(r1, 1);
+        r1.addEdge(r2);
+        r1.addEdge(r7);
+        r2.addEdge(r3);
+        r2.addEdge(r5);
+        r3.addEdge(r4);
+        r4.addEdge(c2, 1);
+        r5.addEdge(r6);
+        r6.addEdge(r3);
+        r6.addEdge(r8);
+        r7.addEdge(r5);
+        r7.addEdge(r8);
+        r8.addEdge(r4);
+        c2.addEdge(hl2, 1);
+        hl2.addEdge(dl2, 1);
+        dl2.addEdge(nl2, 1);
+        nl2.addEdge(tl2, 1);
+        tl2.addEdge(sl2, 1);
+        sl2.addEdge(pl2, 1);
+        pl2.addEdge(al2, 1);
+        al2.addEdge(end, 1);
 
         // initialize message colors
         m1Color = color(255, 0, 0);
@@ -412,9 +411,11 @@ public class Animation extends PApplet {
         m2.setDestination("174.15.121.5");
         m2.setDestMAC("62:FE:36:A5");
 
-        // initialize the graph and assign the shortest path
+        // initialize the graphs and assign the shortest path
         g1 = new Graph(this, m1);
         g1.shortestPath(start, end);
+        g2 = new Graph(this, m2);
+        g2.shortestPath(start, end);
 
         // input the values for the edge weights into the text fields
         controller.get(Textfield.class, "R1_R2").setText(Integer.toString(r1.getEdge(r2).getWeight()));
@@ -446,6 +447,13 @@ public class Animation extends PApplet {
             nl1.display(m1);
             dl1.display(m1);
             hl1.display(m1);
+            al2.display(m1);
+            pl2.display(m1);
+            sl2.display(m1);
+            tl2.display(m1);
+            nl2.display(m1);
+            dl2.display(m1);
+            hl2.display(m1);
         } else if (!g1Move) {
             al1.display(m2);
             pl1.display(m2);
@@ -454,15 +462,14 @@ public class Animation extends PApplet {
             nl1.display(m2);
             dl1.display(m2);
             hl1.display(m2);
+            al2.display(m2);
+            pl2.display(m2);
+            sl2.display(m2);
+            tl2.display(m2);
+            nl2.display(m2);
+            dl2.display(m2);
+            hl2.display(m2);
         }
-        // display side 2
-        al2.display(m1);
-        pl2.display(m1);
-        sl2.display(m1);
-        tl2.display(m1);
-        nl2.display(m1);
-        dl2.display(m1);
-        hl2.display(m1);
 
         // draw the computers
         c1.display();
@@ -490,6 +497,15 @@ public class Animation extends PApplet {
                 g1Move = false;
             }
 
+        }else if (!g1Move && isStart){
+            m2.setMessage(message2);
+            g2.travel(isStart, isPaused);
+            g2.output(i);
+
+            if (g2.message.position.equals(end.position)) {
+                Stop();
+                g1Move = true;
+            }
         }
 
     }
@@ -545,6 +561,8 @@ public class Animation extends PApplet {
         PVector speed = new PVector(value, value);
         g1.horizSpeed = PVector.mult(speed, 2);
         g1.vertSpeed = speed.get();
+        g2.horizSpeed = PVector.mult(speed, 2);
+        g2.vertSpeed = speed.get();
     }
 
     public void Stop() {

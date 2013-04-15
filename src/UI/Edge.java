@@ -2,6 +2,8 @@ package UI;
 
 import processing.core.*;
 
+import java.util.Random;
+
 /*
  * @ author: Mark Hinshaw
  * @ email: mahinshaw@gmail.com
@@ -15,6 +17,10 @@ import processing.core.*;
 public class Edge {
 	
 	private PApplet parent;
+
+    Random rand = new Random();
+    private final int MAX = 7;
+    private final int MIN =1;
 	
 	Node start, end;
 	
@@ -25,7 +31,7 @@ public class Edge {
 		parent = p;
 		start = s;
 		end = e;
-		weight = 0;
+		weight = getRandom();
 		color = parent.color(0, 0, 0 );
 	}
 
@@ -48,6 +54,10 @@ public class Edge {
 	public void setColor(int c){
 		color = c;
 	}
+
+    public int getRandom(){
+        return MIN + (int)(Math.random() * ((MAX - MIN) + 1));
+    }
 	
 	public void display(){
 		if(start.className() != "Layer" && end.className() != "Layer"){
