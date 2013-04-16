@@ -56,7 +56,11 @@ public class Edge {
 	}
 
     public int getRandom(){
-        return MIN + (int)(Math.random() * ((MAX - MIN) + 1));
+        return rand.nextInt(MAX - MIN +1) + MIN;
+    }
+
+    public void setRandomWeight(){
+        this.weight = getRandom();
     }
 	
 	public void display(){

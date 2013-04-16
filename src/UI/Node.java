@@ -140,6 +140,12 @@ public class Node implements Comparable<Node> {
 		
 	}
 
+    public void randomWeights(){
+        for(Edge e : edges){
+            e.setRandomWeight();
+        }
+    }
+
     @Override
     public int compareTo(Node n) {
         return this.order - n.order;

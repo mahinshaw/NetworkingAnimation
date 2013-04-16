@@ -2,6 +2,7 @@ package UI;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import processing.core.*;
 
@@ -18,7 +19,8 @@ import processing.core.*;
 public class Graph {
 	
 	PApplet parent;
-	ArrayList<Node> nodes;
+	List<Node> nodes = new ArrayList<Node>();;
+    List<Node> routers = new ArrayList<Node>();
 	Message message;
 	PVector horizSpeed, vertSpeed;
 	private int nodeCount;
@@ -27,7 +29,6 @@ public class Graph {
 	
 	public Graph(PApplet p, Message m){
 		parent = p;
-		nodes = new ArrayList<Node>();
 		message = m;
 		horizSpeed = new PVector((float)2, (float)2);
 		vertSpeed = new PVector((float)1, (float)1);
@@ -39,9 +40,11 @@ public class Graph {
 	public void addNode(Node n){
 		nodes.add(n);
 		nodeCount++;
+        if (n.className().equalsIgnoreCase("Router"))
+            routers.add(n);
 	}
-	
-	public void setCurrentNode(int i){
+
+    public void setCurrentNode(int i){
 		currentNode = i;
 	}
 	

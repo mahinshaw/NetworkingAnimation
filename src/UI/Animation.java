@@ -418,17 +418,7 @@ public class Animation extends PApplet {
         g2.shortestPath(start, end);
 
         // input the values for the edge weights into the text fields
-        controller.get(Textfield.class, "R1_R2").setText(Integer.toString(r1.getEdge(r2).getWeight()));
-        controller.get(Textfield.class, "R1_R7").setText(Integer.toString(r1.getEdge(r7).getWeight()));
-        controller.get(Textfield.class, "R2_R3").setText(Integer.toString(r2.getEdge(r3).getWeight()));
-        controller.get(Textfield.class, "R2_R5").setText(Integer.toString(r2.getEdge(r5).getWeight()));
-        controller.get(Textfield.class, "R3_R4").setText(Integer.toString(r3.getEdge(r4).getWeight()));
-        controller.get(Textfield.class, "R5_R6").setText(Integer.toString(r5.getEdge(r6).getWeight()));
-        controller.get(Textfield.class, "R6_R3").setText(Integer.toString(r6.getEdge(r3).getWeight()));
-        controller.get(Textfield.class, "R6_R8").setText(Integer.toString(r6.getEdge(r8).getWeight()));
-        controller.get(Textfield.class, "R7_R5").setText(Integer.toString(r7.getEdge(r5).getWeight()));
-        controller.get(Textfield.class, "R7_R8").setText(Integer.toString(r7.getEdge(r8).getWeight()));
-        controller.get(Textfield.class, "R8_R4").setText(Integer.toString(r8.getEdge(r4).getWeight()));
+       setWeightTextFields();
     }
 
     public void draw() {
@@ -495,6 +485,8 @@ public class Animation extends PApplet {
             if (g1.message.position.equals(end.position)) {
                 Stop();
                 g1Move = false;
+                resetRouterWeights();
+                setWeightTextFields();
             }
 
         }else if (!g1Move && isStart){
@@ -505,6 +497,8 @@ public class Animation extends PApplet {
             if (g2.message.position.equals(end.position)) {
                 Stop();
                 g1Move = true;
+                resetRouterWeights();
+                setWeightTextFields();
             }
         }
 
@@ -573,5 +567,31 @@ public class Animation extends PApplet {
             m1.setPosition(start.position);
             m2.setPosition(start.position);
         }
+    }
+
+    public void resetRouterWeights(){
+        r1.randomWeights();
+        r2.randomWeights();
+        r3.randomWeights();
+        r4.randomWeights();
+        r5.randomWeights();
+        r6.randomWeights();
+        r7.randomWeights();
+        r8.randomWeights();
+    }
+
+    public void setWeightTextFields(){
+        // input the values for the edge weights into the text fields
+        controller.get(Textfield.class, "R1_R2").setText(Integer.toString(r1.getEdge(r2).getWeight()));
+        controller.get(Textfield.class, "R1_R7").setText(Integer.toString(r1.getEdge(r7).getWeight()));
+        controller.get(Textfield.class, "R2_R3").setText(Integer.toString(r2.getEdge(r3).getWeight()));
+        controller.get(Textfield.class, "R2_R5").setText(Integer.toString(r2.getEdge(r5).getWeight()));
+        controller.get(Textfield.class, "R3_R4").setText(Integer.toString(r3.getEdge(r4).getWeight()));
+        controller.get(Textfield.class, "R5_R6").setText(Integer.toString(r5.getEdge(r6).getWeight()));
+        controller.get(Textfield.class, "R6_R3").setText(Integer.toString(r6.getEdge(r3).getWeight()));
+        controller.get(Textfield.class, "R6_R8").setText(Integer.toString(r6.getEdge(r8).getWeight()));
+        controller.get(Textfield.class, "R7_R5").setText(Integer.toString(r7.getEdge(r5).getWeight()));
+        controller.get(Textfield.class, "R7_R8").setText(Integer.toString(r7.getEdge(r8).getWeight()));
+        controller.get(Textfield.class, "R8_R4").setText(Integer.toString(r8.getEdge(r4).getWeight()));
     }
 }
