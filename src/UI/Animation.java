@@ -413,9 +413,9 @@ public class Animation extends PApplet {
 
         // initialize the graphs and assign the shortest path
         g1 = new Graph(this, m1);
-        g1.shortestPath(start, end);
+        //g1.shortestPath(start, end);
         g2 = new Graph(this, m2);
-        g2.shortestPath(start, end);
+        //g2.shortestPath(start, end);
 
         // input the values for the edge weights into the text fields
        setWeightTextFields();
@@ -427,6 +427,19 @@ public class Animation extends PApplet {
         // instruction text
         fill(0);
         text("Press 'Enter' to accept message.", map(175, 0, 1600, 0, width), map(30, 0, 900, 0, height));
+
+        text(r1.getEdge(r2).getWeight(), (r2.position.x + r1.position.x)/2, (r2.position.y + r1.position.y)/2);
+        text(r1.getEdge(r7).getWeight(), (r7.position.x + r1.position.x)/2, (r7.position.y + r1.position.y)/2);
+        text(r2.getEdge(r3).getWeight(), (r3.position.x + r2.position.x)/2, (r3.position.y + r2.position.y)/2);
+        text(r2.getEdge(r5).getWeight(), (r5.position.x + r2.position.x)/2, (r5.position.y + r2.position.y)/2);
+        text(r3.getEdge(r4).getWeight(), (r4.position.x + r3.position.x)/2, (r4.position.y + r3.position.y)/2);
+        text(r5.getEdge(r6).getWeight(), (r6.position.x + r5.position.x)/2, (r6.position.y + r5.position.y)/2);
+        text(r6.getEdge(r3).getWeight(), (r3.position.x + r6.position.x)/2, (r3.position.y + r6.position.y)/2);
+        text(r6.getEdge(r8).getWeight(), (r8.position.x + r6.position.x)/2, (r8.position.y + r6.position.y)/2);
+        text(r7.getEdge(r5).getWeight(), (r5.position.x + r7.position.x)/2, (r5.position.y + r7.position.y)/2);
+        text(r7.getEdge(r8).getWeight(), (r8.position.x + r7.position.x)/2, (r8.position.y + r7.position.y)/2);
+        text(r8.getEdge(r4).getWeight(), (r4.position.x + r8.position.x)/2, (r4.position.y + r8.position.y)/2);
+
 
         //display using message input
         if (g1Move) {
@@ -487,6 +500,7 @@ public class Animation extends PApplet {
                 g1Move = false;
                 resetRouterWeights();
                 setWeightTextFields();
+                g1.clearPath();
             }
 
         }else if (!g1Move && isStart){
@@ -499,6 +513,7 @@ public class Animation extends PApplet {
                 g1Move = true;
                 resetRouterWeights();
                 setWeightTextFields();
+                g2.clearPath();
             }
         }
 
@@ -526,7 +541,10 @@ public class Animation extends PApplet {
             if (!isPaused && !isStart) {
                 m1.setPosition(start.position);
                 g1.setCurrentNode(0);
+                g1.shortestPath(start, end);
                 m2.setPosition(start.position);
+                g2.setCurrentNode(0);
+                g2.shortestPath(start, end);
                 isStart = true;
             } else if (isPaused && isStart) {
                 isPaused = false;
@@ -557,6 +575,50 @@ public class Animation extends PApplet {
         g1.vertSpeed = speed.get();
         g2.horizSpeed = PVector.mult(speed, 2);
         g2.vertSpeed = speed.get();
+    }
+
+    public void R1_R2(String value){
+        r1.getEdge(r2).setWeight(Integer.parseInt(value));
+    }
+
+    public void R1_R7(String value){
+        r1.getEdge(r7).setWeight(Integer.parseInt(value));
+    }
+
+    public void R2_R3(String value){
+        r2.getEdge(r3).setWeight(Integer.parseInt(value));
+    }
+
+    public void R2_R5(String value){
+        r2.getEdge(r5).setWeight(Integer.parseInt(value));
+    }
+
+    public void R3_R4(String value){
+        r3.getEdge(r4).setWeight(Integer.parseInt(value));
+    }
+
+    public void R5_R6(String value){
+        r5.getEdge(r6).setWeight(Integer.parseInt(value));
+    }
+
+    public void R6_R3(String value){
+        r6.getEdge(r3).setWeight(Integer.parseInt(value));
+    }
+
+    public void R6_R8(String value){
+        r6.getEdge(r8).setWeight(Integer.parseInt(value));
+    }
+
+    public void R7_R5(String value){
+        r7.getEdge(r5).setWeight(Integer.parseInt(value));
+    }
+
+    public void R7_R8(String value){
+        r7.getEdge(r8).setWeight(Integer.parseInt(value));
+    }
+
+    public void R8_R4(String value){
+        r8.getEdge(r4).setWeight(Integer.parseInt(value));
     }
 
     public void Stop() {

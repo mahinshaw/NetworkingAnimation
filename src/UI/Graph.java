@@ -89,6 +89,13 @@ public class Graph {
 
         Collections.reverse(nodes);
     }
+
+    public void clearPath(){
+        nodes.clear();
+        routers.clear();
+        currentNode = 0;
+        nodeCount = 0;
+    }
 	
 	public void sendACK(){
 		if(nodes.get(currentNode).className().equals("Router")  && nodes.get(currentNode-1).className().equals("Router")){
