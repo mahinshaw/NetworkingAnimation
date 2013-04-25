@@ -127,133 +127,123 @@ public class Animation extends PApplet {
         ;
 
         controller.addTextfield("R1_R2")
-                .setPosition(map(500, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(420, 0, 1600, 0, width), map(400, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R1 to R2")
         ;
 
         controller.addTextfield("R1_R7")
-                .setPosition(map(550, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(420, 0, 1600, 0, width), map(520, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R1 to R7")
         ;
 
         controller.addTextfield("R2_R3")
-                .setPosition(map(600, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(780, 0, 1600, 0, width), map(340, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R2 to R3")
         ;
 
         controller.addTextfield("R2_R5")
-                .setPosition(map(650, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(530, 0, 1600, 0, width), map(400, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R2 to R5")
         ;
 
         controller.addTextfield("R3_R4")
-                .setPosition(map(700, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(1130, 0, 1600, 0, width), map(400, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R3 to R4")
         ;
 
         controller.addTextfield("R5_R6")
-                .setPosition(map(750, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(780, 0, 1600, 0, width), map(460, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R5 to R6")
         ;
 
         controller.addTextfield("R6_R3")
-                .setPosition(map(800, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(1030, 0, 1600, 0, width), map(400, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R6 to R3")
         ;
 
         controller.addTextfield("R6_R8")
-                .setPosition(map(850, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(1030, 0, 1600, 0, width), map(520, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
+                        //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R6 to R8")
         ;
 
         controller.addTextfield("R7_R5")
-                .setPosition(map(900, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(530, 0, 1600, 0, width), map(520, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R7 to R5")
         ;
 
         controller.addTextfield("R7_R8")
-                .setPosition(map(950, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(780, 0, 1600, 0, width), map(580, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R7 to R8")
         ;
 
         controller.addTextfield("R8_R4")
-                .setPosition(map(1000, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setPosition(map(1130, 0, 1600, 0, width), map(520, 0, 900, 0, height))
                 .setSize(30, 30)
                 .setFont(f)
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
                 .setCaptionLabel("R8 to R4")
         ;
@@ -418,7 +408,7 @@ public class Animation extends PApplet {
         //g2.shortestPath(start, end);
 
         // input the values for the edge weights into the text fields
-       setWeightTextFields();
+        setWeightTextFields();
     }
 
     public void draw() {
@@ -427,19 +417,6 @@ public class Animation extends PApplet {
         // instruction text
         fill(0);
         text("Press 'Enter' to accept message.", map(175, 0, 1600, 0, width), map(30, 0, 900, 0, height));
-
-        text(r1.getEdge(r2).getWeight(), (r2.position.x + r1.position.x)/2, (r2.position.y + r1.position.y)/2);
-        text(r1.getEdge(r7).getWeight(), (r7.position.x + r1.position.x)/2, (r7.position.y + r1.position.y)/2);
-        text(r2.getEdge(r3).getWeight(), (r3.position.x + r2.position.x)/2, (r3.position.y + r2.position.y)/2);
-        text(r2.getEdge(r5).getWeight(), (r5.position.x + r2.position.x)/2, (r5.position.y + r2.position.y)/2);
-        text(r3.getEdge(r4).getWeight(), (r4.position.x + r3.position.x)/2, (r4.position.y + r3.position.y)/2);
-        text(r5.getEdge(r6).getWeight(), (r6.position.x + r5.position.x)/2, (r6.position.y + r5.position.y)/2);
-        text(r6.getEdge(r3).getWeight(), (r3.position.x + r6.position.x)/2, (r3.position.y + r6.position.y)/2);
-        text(r6.getEdge(r8).getWeight(), (r8.position.x + r6.position.x)/2, (r8.position.y + r6.position.y)/2);
-        text(r7.getEdge(r5).getWeight(), (r5.position.x + r7.position.x)/2, (r5.position.y + r7.position.y)/2);
-        text(r7.getEdge(r8).getWeight(), (r8.position.x + r7.position.x)/2, (r8.position.y + r7.position.y)/2);
-        text(r8.getEdge(r4).getWeight(), (r4.position.x + r8.position.x)/2, (r4.position.y + r8.position.y)/2);
-
 
         //display using message input
         if (g1Move) {
@@ -490,6 +467,21 @@ public class Animation extends PApplet {
         // draw computer 2
         c2.display();
 
+        fill(color(255, 0, 0));
+        textSize(25);
+        text(r1.getEdge(r2).getWeight(), (r2.position.x + r1.position.x) / 2, (r2.position.y + r1.position.y) / 2);
+        text(r1.getEdge(r7).getWeight(), (r7.position.x + r1.position.x) / 2, (r7.position.y + r1.position.y) / 2);
+        text(r2.getEdge(r3).getWeight(), (r3.position.x + r2.position.x) / 2, (r3.position.y + r2.position.y) / 2);
+        text(r2.getEdge(r5).getWeight(), (r5.position.x + r2.position.x) / 2, (r5.position.y + r2.position.y) / 2);
+        text(r3.getEdge(r4).getWeight(), (r4.position.x + r3.position.x) / 2, (r4.position.y + r3.position.y) / 2);
+        text(r5.getEdge(r6).getWeight(), (r6.position.x + r5.position.x) / 2, (r6.position.y + r5.position.y) / 2);
+        text(r6.getEdge(r3).getWeight(), (r3.position.x + r6.position.x) / 2, (r3.position.y + r6.position.y) / 2);
+        text(r6.getEdge(r8).getWeight(), (r8.position.x + r6.position.x) / 2, (r8.position.y + r6.position.y) / 2);
+        text(r7.getEdge(r5).getWeight(), (r5.position.x + r7.position.x) / 2, (r5.position.y + r7.position.y) / 2);
+        text(r7.getEdge(r8).getWeight(), (r8.position.x + r7.position.x) / 2, (r8.position.y + r7.position.y) / 2);
+        text(r8.getEdge(r4).getWeight(), (r4.position.x + r8.position.x) / 2, (r4.position.y + r8.position.y) / 2);
+        textSize(16);
+
         if (g1Move && isStart) {
             m1.setMessage(message1);
             g1.travel(isStart, isPaused);
@@ -503,7 +495,7 @@ public class Animation extends PApplet {
                 g1.clearPath();
             }
 
-        }else if (!g1Move && isStart){
+        } else if (!g1Move && isStart) {
             m2.setMessage(message2);
             g2.travel(isStart, isPaused);
             g2.output(i);
@@ -520,7 +512,7 @@ public class Animation extends PApplet {
     }
 
 	/*
-	 * Controller Methods
+     * Controller Methods
 	 */
 
     public void controlEvent(ControlEvent event) {
@@ -577,48 +569,81 @@ public class Animation extends PApplet {
         g2.vertSpeed = speed.get();
     }
 
-    public void R1_R2(String value){
-        r1.getEdge(r2).setWeight(Integer.parseInt(value));
+    public void R1_R2(String value) {
+        if (value.matches("[1-7]"))
+            r1.getEdge(r2).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R1_R2").setText(String.valueOf(r1.getEdge(r2).getWeight()));
     }
 
-    public void R1_R7(String value){
-        r1.getEdge(r7).setWeight(Integer.parseInt(value));
+    public void R1_R7(String value) {
+        if (value.matches("[1-7]"))
+            r1.getEdge(r7).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R1_R7").setText(String.valueOf(r1.getEdge(r7).getWeight()));
     }
 
-    public void R2_R3(String value){
-        r2.getEdge(r3).setWeight(Integer.parseInt(value));
+    public void R2_R3(String value) {
+        if (value.matches("[1-7]"))
+            r2.getEdge(r3).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R2_R3").setText(String.valueOf(r2.getEdge(r3).getWeight()));
     }
 
-    public void R2_R5(String value){
-        r2.getEdge(r5).setWeight(Integer.parseInt(value));
+    public void R2_R5(String value) {
+        if (value.matches("[1-7]"))
+            r2.getEdge(r5).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R2_R5").setText(String.valueOf(r2.getEdge(r5).getWeight()));
     }
 
-    public void R3_R4(String value){
-        r3.getEdge(r4).setWeight(Integer.parseInt(value));
+    public void R3_R4(String value) {
+        if (value.matches("[1-7]"))
+            r3.getEdge(r4).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R3_R4").setText(String.valueOf(r3.getEdge(r4).getWeight()));
     }
 
-    public void R5_R6(String value){
-        r5.getEdge(r6).setWeight(Integer.parseInt(value));
+    public void R5_R6(String value) {
+        if (value.matches("[1-7]"))
+            r5.getEdge(r6).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R5_R6").setText(String.valueOf(r5.getEdge(r6).getWeight()));
     }
 
-    public void R6_R3(String value){
-        r6.getEdge(r3).setWeight(Integer.parseInt(value));
+    public void R6_R3(String value) {
+        if (value.matches("[1-7]"))
+            r6.getEdge(r3).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R6_R3").setText(String.valueOf(r6.getEdge(r3).getWeight()));
     }
 
-    public void R6_R8(String value){
-        r6.getEdge(r8).setWeight(Integer.parseInt(value));
+    public void R6_R8(String value) {
+        if (value.matches("[1-7]"))
+            r6.getEdge(r8).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R6_R8").setText(String.valueOf(r6.getEdge(r8).getWeight()));
     }
 
-    public void R7_R5(String value){
-        r7.getEdge(r5).setWeight(Integer.parseInt(value));
+    public void R7_R5(String value) {
+        if (value.matches("[1-7]"))
+            r7.getEdge(r5).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R7_R5").setText(String.valueOf(r7.getEdge(r5).getWeight()));
     }
 
-    public void R7_R8(String value){
-        r7.getEdge(r8).setWeight(Integer.parseInt(value));
+    public void R7_R8(String value) {
+        if (value.matches("[1-7]"))
+            r7.getEdge(r8).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R7_R8").setText(String.valueOf(r7.getEdge(r8).getWeight()));
     }
 
-    public void R8_R4(String value){
-        r8.getEdge(r4).setWeight(Integer.parseInt(value));
+    public void R8_R4(String value) {
+        if (value.matches("[1-7]"))
+            r8.getEdge(r4).setWeight(Integer.parseInt(value));
+        else
+            controller.get(Textfield.class, "R8_R4").setText(String.valueOf(r8.getEdge(r4).getWeight()));
     }
 
     public void Stop() {
@@ -631,7 +656,7 @@ public class Animation extends PApplet {
         }
     }
 
-    public void resetRouterWeights(){
+    public void resetRouterWeights() {
         r1.randomWeights();
         r2.randomWeights();
         r3.randomWeights();
@@ -642,7 +667,7 @@ public class Animation extends PApplet {
         r8.randomWeights();
     }
 
-    public void setWeightTextFields(){
+    public void setWeightTextFields() {
         // input the values for the edge weights into the text fields
         controller.get(Textfield.class, "R1_R2").setText(Integer.toString(r1.getEdge(r2).getWeight()));
         controller.get(Textfield.class, "R1_R7").setText(Integer.toString(r1.getEdge(r7).getWeight()));
@@ -655,5 +680,12 @@ public class Animation extends PApplet {
         controller.get(Textfield.class, "R7_R5").setText(Integer.toString(r7.getEdge(r5).getWeight()));
         controller.get(Textfield.class, "R7_R8").setText(Integer.toString(r7.getEdge(r8).getWeight()));
         controller.get(Textfield.class, "R8_R4").setText(Integer.toString(r8.getEdge(r4).getWeight()));
+    }
+
+    public boolean isOneSeven(String s) {
+        double digit = Double.parseDouble(s);
+        String regex = "^";
+
+        return true;
     }
 }

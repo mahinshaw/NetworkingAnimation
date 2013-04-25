@@ -24,10 +24,8 @@ public class ShortestPath {
 
     private final Graph map;
 
-    private final Comparator<Node> shortestDistanceComparator = new Comparator<Node>()
-    {
-        public int compare(Node left, Node right)
-        {
+    private final Comparator<Node> shortestDistanceComparator = new Comparator<Node>() {
+        public int compare(Node left, Node right) {
             int result = getShortestDistance(left) - getShortestDistance(right);
 
             return (result == 0) ? left.compareTo(right) : result;
@@ -45,11 +43,11 @@ public class ShortestPath {
     /*
     Constructor
      */
-    public ShortestPath(Graph graph){
+    public ShortestPath(Graph graph) {
         this.map = graph;
     }
 
-    private void initialize(Node start){
+    private void initialize(Node start) {
         unsettledNodes.clear();
         settledNodes.clear();
 
@@ -60,12 +58,12 @@ public class ShortestPath {
         unsettledNodes.add(start);
     }
 
-    public void execute(Node start, Node end){
+    public void execute(Node start, Node end) {
         initialize(start);
 
         Node n;
 
-        while((n = unsettledNodes.poll()) != null){
+        while ((n = unsettledNodes.poll()) != null) {
             assert !isSettled(n);
 
             if (n == end) break;
@@ -76,38 +74,39 @@ public class ShortestPath {
         }
     }
 
-    public void relaxNeighbors(Node m){
-        for (Node n : map.getSuccessors(m)){
+    public void relaxNeighbors(Node m) {
+        for (Node n : map.getSuccessors(m)) {
             if (isSettled(n)) continue;
 
             int shortDist = getShortestDistance(m) + map.getDistance(m, n);
 
-            if (shortDist < getShortestDistance(n)){
+            if (shortDist < getShortestDistance(n)) {
                 setShortestDistance(n, shortDist);
                 setPredecessor(n, m);
             }
         }
     }
 
-    private boolean isSettled(Node n){
+    private boolean isSettled(Node n) {
         return settledNodes.contains(n);
     }
 
-    private int getShortestDistance(Node n){
+    private int getShortestDistance(Node n) {
         Integer d = shortestDistances.get(n);
         return (d == null) ? HIGH_VALUE : d;
     }
-    private void setShortestDistance(Node n, int dist){
+
+    private void setShortestDistance(Node n, int dist) {
         unsettledNodes.remove(n);
         shortestDistances.put(n, dist);
         unsettledNodes.add(n);
     }
 
-    public Node getPredecessor(Node n){
+    public Node getPredecessor(Node n) {
         return predecessors.get(n);
     }
 
-    private void setPredecessor(Node n, Node m){
+    private void setPredecessor(Node n, Node m) {
         predecessors.put(n, m);
     }
 }

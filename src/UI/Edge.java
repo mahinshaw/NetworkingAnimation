@@ -15,58 +15,58 @@ import java.util.Random;
  */
 
 public class Edge {
-	
-	private PApplet parent;
+
+    private PApplet parent;
 
     Random rand = new Random();
     private final int MAX = 7;
-    private final int MIN =1;
-	
-	Node start, end;
-	
-	private int weight;
-	private int color;
-	
-	public Edge(PApplet p, Node s, Node e){
-		parent = p;
-		start = s;
-		end = e;
-		weight = getRandom();
-		color = parent.color(0, 0, 0 );
-	}
+    private final int MIN = 1;
 
-    public Edge(PApplet p, Node s, Node e, int w){
+    Node start, end;
+
+    private int weight;
+    private int color;
+
+    public Edge(PApplet p, Node s, Node e) {
+        parent = p;
+        start = s;
+        end = e;
+        weight = getRandom();
+        color = parent.color(0, 0, 0);
+    }
+
+    public Edge(PApplet p, Node s, Node e, int w) {
         parent = p;
         start = s;
         end = e;
         weight = w;
-        color = parent.color(0, 0, 0 );
-    }
-	
-	public int getWeight(){
-		return weight;
-	}
-	
-	public void setWeight(int w){
-		weight = w;
-	}
-	
-	public void setColor(int c){
-		color = c;
-	}
-
-    public int getRandom(){
-        return rand.nextInt(MAX - MIN +1) + MIN;
+        color = parent.color(0, 0, 0);
     }
 
-    public void setRandomWeight(){
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int w) {
+        weight = w;
+    }
+
+    public void setColor(int c) {
+        color = c;
+    }
+
+    public int getRandom() {
+        return rand.nextInt(MAX - MIN + 1) + MIN;
+    }
+
+    public void setRandomWeight() {
         this.weight = getRandom();
     }
-	
-	public void display(){
-		if(start.className() != "Layer" && end.className() != "Layer"){
-			parent.fill(color);
-			parent.line(start.position.x, start.position.y, end.position.x, end.position.y);
-		}
-	}
+
+    public void display() {
+        if (start.className() != "Layer" && end.className() != "Layer") {
+            parent.fill(color);
+            parent.line(start.position.x, start.position.y, end.position.x, end.position.y);
+        }
+    }
 }
