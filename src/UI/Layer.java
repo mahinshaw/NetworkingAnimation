@@ -116,40 +116,30 @@ public class Layer extends Node {
                 && m.position.y <= (position.y + (height / 2))) {
 
             float x = (parent.width / 2);
-            float y = parent.map(700, 0, 900, 0, parent.height);
-            parent.rectMode(parent.CENTER);
-
-            PFont f = parent.createFont("Georgia", 16, true);
-            parent.textFont(f);
+            float y = parent.map(750, 0, 900, 0, parent.height);
 
             switch (name) {
                 case "Application Layer":
-                    parent.fill(225);
-                    parent.rect(x, y, 600, 200);
                     parent.fill(0);
                     parent.text("The message is: \n" + m.getMessage(), x, y);
                     break;
                 case "Presentation Layer":
-                    // parent.rect(x, y, 400, 200);
 
                     break;
                 case "Session Layer":
-                    // parent.rect(x, y, 400, 200);
 
                     break;
                 case "Transportation Layer":
-                    // parent.rect(x, y, 400, 200);
                     // port address
+                    parent.fill(0);
+                    parent.text("The port address is: \n" + m.getType(), x, y);
 
                     break;
                 case "Network Layer":
-                    parent.fill(225);
-                    parent.rect(x, y, 600, 200);
                     // IP address
                     parent.fill(0);
                     if (m.position.x < parent.width / 2) {
-                        parent.text("The Source IP address is: \n" + m.getSource(),
-                                x, y);
+                        parent.text("The Source IP address is: \n" + m.getSource(), x, y);
                     } else {
                         parent.text(
                                 "The Destination IP address is: \n"
@@ -158,8 +148,6 @@ public class Layer extends Node {
 
                     break;
                 case "Data Link Layer":
-                    parent.fill(225);
-                    parent.rect(x, y, 600, 200);
                     // MAC Address
                     parent.fill(0);
                     if (m.position.x < parent.width / 2) {
@@ -173,8 +161,6 @@ public class Layer extends Node {
                     }
                     break;
                 case "Physical Layer":
-                    parent.fill(225);
-                    parent.rect(x, y, 600, 200);
                     // preamble and sfd
                     parent.fill(0);
                     parent.text("The Preamble is: " + m.getPreamble()

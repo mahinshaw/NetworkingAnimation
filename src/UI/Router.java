@@ -14,20 +14,22 @@ public class Router extends Node {
 
     PImage router;
 
-    public Router(PApplet p, int o, float x, float y, float w, float h) {
+    public Router(PApplet p, int o, float x, float y, float w, float h, String n) {
         super(p, o);
         super.setVector(x, y);
         super.setWidth(w);
         super.setHeight(h);
-        router = parent.loadImage("Router1.jpg");
+        this.router = parent.loadImage("Router1.jpg");
+        this.name = n;
     }
 
-    public Router(PApplet p, int o, PVector v, float w, float h) {
+    public Router(PApplet p, int o, PVector v, float w, float h, String n) {
         super(p, o);
         super.setVector(v);
         super.setWidth(w);
         super.setHeight(h);
-        router = parent.loadImage("Router1.jpg");
+        this.router = parent.loadImage("Router1.jpg");
+        this.name = n;
     }
 
     public String className() {
@@ -46,14 +48,7 @@ public class Router extends Node {
         if (m.position.x >= (position.x - (width)) && m.position.x <= (position.x + (width))
                 && m.position.y >= (position.y - (height / 2))
                 && m.position.y <= (position.y + (height / 2))) {
-            float x = (parent.width / 2);
-            float y = parent.map(700, 0, 900, 0, parent.height);
-            parent.rectMode(parent.CENTER);
-
-            PFont f = parent.createFont("Georgia", 16, true);
-            parent.textFont(f);
-            parent.fill(225);
-            parent.rect(x, y, parent.width, 200);
+            float y = parent.map(750, 0, 900, 0, parent.height);
             m.drawSineWave(i, y);
         }
     }

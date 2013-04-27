@@ -19,32 +19,23 @@ import java.util.Set;
 
 public class ShortestPath {
 
-    public static final int HIGH_VALUE = 10000;
+    public static final int HIGH_VALUE = Integer.MAX_VALUE;
     private static final int INITIAL_VALUE = 26;
 
-    private final Graph map;
-
+    private final Graph graph;
     private final Comparator<Node> shortestDistanceComparator = new Comparator<Node>() {
         public int compare(Node left, Node right) {
             int result = getShortestDistance(left) - getShortestDistance(right);
-
             return (result == 0) ? left.compareTo(right) : result;
         }
     };
-
     private final PriorityQueue<Node> unsettledNodes = new PriorityQueue<Node>(INITIAL_VALUE, shortestDistanceComparator);
-
     private final Set<Node> settledNodes = new HashSet<Node>();
-
     private final Map<Node, Integer> shortestDistances = new HashMap<Node, Integer>();
-
     private final Map<Node, Node> predecessors = new HashMap<Node, Node>();
 
-    /*
-    Constructor
-     */
     public ShortestPath(Graph graph) {
-        this.map = graph;
+        this.graph = graph;
     }
 
     private void initialize(Node start) {
@@ -64,22 +55,16 @@ public class ShortestPath {
         Node n;
 
         while ((n = unsettledNodes.poll()) != null) {
-            assert !isSettled(n);
-
             if (n == end) break;
-
             settledNodes.add(n);
-
             relaxNeighbors(n);
         }
     }
 
     public void relaxNeighbors(Node m) {
-        for (Node n : map.getSuccessors(m)) {
+        for (Node n : graph.getSuccessors(m)) {
             if (isSettled(n)) continue;
-
-            int shortDist = getShortestDistance(m) + map.getDistance(m, n);
-
+            int shortDist = getShortestDistance(m) + graph.getDistance(m, n);
             if (shortDist < getShortestDistance(n)) {
                 setShortestDistance(n, shortDist);
                 setPredecessor(n, m);

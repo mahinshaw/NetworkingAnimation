@@ -85,8 +85,8 @@ public class Message {
         destinationMAC = "00000100100011111111001000100011";
         sourMAC = "06:4C:F3:4B";
         sourceMAC = "00000110010011001111001101001011";
-        type = "21";
-        crc = "";
+        type = "80";
+        crc = "10111100";
         preamble = "101010101010101010101010101010101010101010";
         sfd = "10101011";
         frequency = 9;
@@ -266,6 +266,7 @@ public class Message {
     public void display() {
         parent.fill(color);
         parent.strokeWeight(2);
+        parent.stroke(0);
         parent.ellipse(position.x, position.y, width, height);
     }
 
@@ -387,5 +388,4 @@ public class Message {
         parent.strokeWeight(1);
         parent.ellipse(ack.x, ack.y, width / 2, height / 2);
     }
-
 }

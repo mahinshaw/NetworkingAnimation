@@ -126,6 +126,50 @@ public class Animation extends PApplet {
                 .setCaptionLabel("")
         ;
 
+        controller.addTextfield("Message1_Route")
+                .setPosition(map(500, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setSize(200, 30)
+                .setFont(f)
+                .setFocus(false)
+                .setColor(color(0, 0, 0))
+                .setColorBackground(color(156, 156, 156))
+                .setAutoClear(false)
+                .getCaptionLabel().setText("Message 1: Route").setFont(f).setColor(0)
+        ;
+
+        controller.addTextfield("Message1_Weight")
+                .setPosition(map(500, 0, 1600, 0, width), map(250, 0, 900, 0, height))
+                .setSize(30, 30)
+                .setFont(f)
+                .setFocus(false)
+                .setColor(color(0, 0, 0))
+                .setColorBackground(color(156, 156, 156))
+                .setAutoClear(false)
+                .getCaptionLabel().setText("Message 1: Weight").setFont(f).setColor(0);
+        ;
+
+        controller.addTextfield("Message2_Route")
+                .setPosition(map(900, 0, 1600, 0, width), map(150, 0, 900, 0, height))
+                .setSize(200, 30)
+                .setFont(f)
+                .setFocus(false)
+                .setColor(color(0, 0, 0))
+                .setColorBackground(color(156, 156, 156))
+                .setAutoClear(false)
+                .getCaptionLabel().setText("Message 2: Route").setFont(f).setColor(0)
+        ;
+
+        controller.addTextfield("Message2_Weight")
+                .setPosition(map(900, 0, 1600, 0, width), map(250, 0, 900, 0, height))
+                .setSize(30, 30)
+                .setFont(f)
+                .setFocus(false)
+                .setColor(color(0, 0, 0))
+                .setColorBackground(color(156, 156, 156))
+                .setAutoClear(false)
+                .getCaptionLabel().setText("Message 2: Weight").setFont(f).setColor(0)
+        ;
+
         controller.addTextfield("R1_R2")
                 .setPosition(map(420, 0, 1600, 0, width), map(400, 0, 900, 0, height))
                 .setSize(30, 30)
@@ -134,7 +178,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R1 to R2")
+                .getCaptionLabel().setText("R1 to R2").setColor(0)
         ;
 
         controller.addTextfield("R1_R7")
@@ -145,7 +189,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R1 to R7")
+                .getCaptionLabel().setText("R1 to R7").setColor(0)
         ;
 
         controller.addTextfield("R2_R3")
@@ -156,7 +200,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R2 to R3")
+                .getCaptionLabel().setText("R2 to R3").setColor(0)
         ;
 
         controller.addTextfield("R2_R5")
@@ -167,7 +211,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R2 to R5")
+                .getCaptionLabel().setText("R2 to R5").setColor(0)
         ;
 
         controller.addTextfield("R3_R4")
@@ -178,7 +222,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R3 to R4")
+                .getCaptionLabel().setText("R3 to R4").setColor(0)
         ;
 
         controller.addTextfield("R5_R6")
@@ -189,7 +233,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R5 to R6")
+                .getCaptionLabel().setText("R5 to R6").setColor(0)
         ;
 
         controller.addTextfield("R6_R3")
@@ -200,7 +244,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R6 to R3")
+                .getCaptionLabel().setText("R6 to R3").setColor(0)
         ;
 
         controller.addTextfield("R6_R8")
@@ -210,9 +254,8 @@ public class Animation extends PApplet {
                 .setFocus(false)
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
-                        //.setText(Integer.toString(r1.getEdge(r2).getWeight()))
                 .setAutoClear(false)
-                .setCaptionLabel("R6 to R8")
+                .getCaptionLabel().setText("R6 to R8").setColor(0)
         ;
 
         controller.addTextfield("R7_R5")
@@ -223,7 +266,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R7 to R5")
+                .getCaptionLabel().setText("R7 to R5").setColor(0)
         ;
 
         controller.addTextfield("R7_R8")
@@ -234,7 +277,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R7 to R8")
+                .getCaptionLabel().setText("R7 to R8").setColor(0)
         ;
 
         controller.addTextfield("R8_R4")
@@ -245,7 +288,7 @@ public class Animation extends PApplet {
                 .setColor(color(0, 0, 0))
                 .setColorBackground(color(156, 156, 156))
                 .setAutoClear(false)
-                .setCaptionLabel("R8 to R4")
+                .getCaptionLabel().setText("R8 to R4").setColor(0)
         ;
 
         controller.addToggle("Start_Pause")
@@ -274,11 +317,15 @@ public class Animation extends PApplet {
 
         controller.addKnob("Speed")
                 .setPosition(map(350, 0, 1600, 0, width), map(50, 0, 900, 0, height))
+                .setColorValueLabel(color(0, 0, 0))
                 .setRadius(50)
                 .setRange(1, 3)
                 .setNumberOfTickMarks(8)
+                .setColorForeground(color(255))
+                        //.setColorBackground(color(0, 160, 100))
+                .setColorActive(color(255, 255, 0))
                 .snapToTickMarks(true)
-                .getCaptionLabel().setColor(0).setFont(f)
+                .getCaptionLabel().setColor(color(0, 0, 0)).setFont(f)
         ;
 
 
@@ -347,45 +394,45 @@ public class Animation extends PApplet {
         c2 = new Computer(this, 17, C2, 50, 50);
 
         //initialize Router classes
-        r1 = new Router(this, 9, R1, 40, 40);
-        r2 = new Router(this, 10, R2, 40, 40);
-        r3 = new Router(this, 11, R3, 40, 40);
-        r4 = new Router(this, 12, R4, 40, 40);
-        r5 = new Router(this, 13, R5, 40, 40);
-        r6 = new Router(this, 14, R6, 40, 40);
-        r7 = new Router(this, 15, R7, 40, 40);
-        r8 = new Router(this, 16, R8, 40, 40);
+        r1 = new Router(this, 9, R1, 40, 40, "R1");
+        r2 = new Router(this, 10, R2, 40, 40, "R2");
+        r3 = new Router(this, 11, R3, 40, 40, "R3");
+        r4 = new Router(this, 12, R4, 40, 40, "R4");
+        r5 = new Router(this, 13, R5, 40, 40, "R5");
+        r6 = new Router(this, 14, R6, 40, 40, "R6");
+        r7 = new Router(this, 15, R7, 40, 40, "R7");
+        r8 = new Router(this, 16, R8, 40, 40, "R8");
 
         // add edges
-        start.addEdge(al1, 1);
-        al1.addEdge(pl1, 1);
-        pl1.addEdge(sl1, 1);
-        sl1.addEdge(tl1, 1);
-        tl1.addEdge(nl1, 1);
-        nl1.addEdge(dl1, 1);
-        dl1.addEdge(hl1, 1);
-        hl1.addEdge(c1, 1);
-        c1.addEdge(r1, 1);
+        start.addEdge(al1, 0);
+        al1.addEdge(pl1, 0);
+        pl1.addEdge(sl1, 0);
+        sl1.addEdge(tl1, 0);
+        tl1.addEdge(nl1, 0);
+        nl1.addEdge(dl1, 0);
+        dl1.addEdge(hl1, 0);
+        hl1.addEdge(c1, 0);
+        c1.addEdge(r1, 0);
         r1.addEdge(r2);
         r1.addEdge(r7);
         r2.addEdge(r3);
         r2.addEdge(r5);
         r3.addEdge(r4);
-        r4.addEdge(c2, 1);
+        r4.addEdge(c2, 0);
         r5.addEdge(r6);
         r6.addEdge(r3);
         r6.addEdge(r8);
         r7.addEdge(r5);
         r7.addEdge(r8);
         r8.addEdge(r4);
-        c2.addEdge(hl2, 1);
-        hl2.addEdge(dl2, 1);
-        dl2.addEdge(nl2, 1);
-        nl2.addEdge(tl2, 1);
-        tl2.addEdge(sl2, 1);
-        sl2.addEdge(pl2, 1);
-        pl2.addEdge(al2, 1);
-        al2.addEdge(end, 1);
+        c2.addEdge(hl2, 0);
+        hl2.addEdge(dl2, 0);
+        dl2.addEdge(nl2, 0);
+        nl2.addEdge(tl2, 0);
+        tl2.addEdge(sl2, 0);
+        sl2.addEdge(pl2, 0);
+        pl2.addEdge(al2, 0);
+        al2.addEdge(end, 0);
 
         // initialize message colors
         m1Color = color(255, 0, 0);
@@ -412,7 +459,7 @@ public class Animation extends PApplet {
     }
 
     public void draw() {
-        background(200);
+        background(100);
 
         // instruction text
         fill(0);
@@ -467,45 +514,39 @@ public class Animation extends PApplet {
         // draw computer 2
         c2.display();
 
-        fill(color(255, 0, 0));
-        textSize(25);
-        text(r1.getEdge(r2).getWeight(), (r2.position.x + r1.position.x) / 2, (r2.position.y + r1.position.y) / 2);
-        text(r1.getEdge(r7).getWeight(), (r7.position.x + r1.position.x) / 2, (r7.position.y + r1.position.y) / 2);
-        text(r2.getEdge(r3).getWeight(), (r3.position.x + r2.position.x) / 2, (r3.position.y + r2.position.y) / 2);
-        text(r2.getEdge(r5).getWeight(), (r5.position.x + r2.position.x) / 2, (r5.position.y + r2.position.y) / 2);
-        text(r3.getEdge(r4).getWeight(), (r4.position.x + r3.position.x) / 2, (r4.position.y + r3.position.y) / 2);
-        text(r5.getEdge(r6).getWeight(), (r6.position.x + r5.position.x) / 2, (r6.position.y + r5.position.y) / 2);
-        text(r6.getEdge(r3).getWeight(), (r3.position.x + r6.position.x) / 2, (r3.position.y + r6.position.y) / 2);
-        text(r6.getEdge(r8).getWeight(), (r8.position.x + r6.position.x) / 2, (r8.position.y + r6.position.y) / 2);
-        text(r7.getEdge(r5).getWeight(), (r5.position.x + r7.position.x) / 2, (r5.position.y + r7.position.y) / 2);
-        text(r7.getEdge(r8).getWeight(), (r8.position.x + r7.position.x) / 2, (r8.position.y + r7.position.y) / 2);
-        text(r8.getEdge(r4).getWeight(), (r4.position.x + r8.position.x) / 2, (r4.position.y + r8.position.y) / 2);
-        textSize(16);
+        fill(225);
+        stroke(0);
+        rect(width / 2, map(750, 0, 900, 0, height), width, 200);
 
         if (g1Move && isStart) {
             m1.setMessage(message1);
             g1.travel(isStart, isPaused);
             g1.output(i);
-            //i--;
+            if (m1.position.equals(tl1.position)) {
+                Message1_Route(g1.routersToString());
+                Message1_Weight(g1.PathLength());
+            }
             if (g1.message.position.equals(end.position)) {
                 Stop();
                 g1Move = false;
                 resetRouterWeights();
                 setWeightTextFields();
-                g1.clearPath();
             }
 
         } else if (!g1Move && isStart) {
             m2.setMessage(message2);
             g2.travel(isStart, isPaused);
             g2.output(i);
-
+            if (m2.position.equals(tl1.position)) {
+                Message2_Route(g2.routersToString());
+                Message2_Weight(g2.PathLength());
+            }
             if (g2.message.position.equals(end.position)) {
+
                 Stop();
                 g1Move = true;
                 resetRouterWeights();
                 setWeightTextFields();
-                g2.clearPath();
             }
         }
 
@@ -527,16 +568,45 @@ public class Animation extends PApplet {
         message2 = text;
     }
 
+    public void Message1_Route(String s) {
+        controller.get(Textfield.class, "Message1_Route").setText(s);
+    }
+
+    public void Message1_Weight(String s) {
+        controller.get(Textfield.class, "Message1_Weight").setText(s);
+
+    }
+
+    public void Message2_Route(String s) {
+        controller.get(Textfield.class, "Message2_Route").setText(s);
+    }
+
+    public void Message2_Weight(String s) {
+        controller.get(Textfield.class, "Message2_Weight").setText(s);
+    }
+
     public void Start_Pause(boolean value) {
         if (!value) {
             controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Pause");
             if (!isPaused && !isStart) {
-                m1.setPosition(start.position);
-                g1.setCurrentNode(0);
-                g1.shortestPath(start, end);
-                m2.setPosition(start.position);
-                g2.setCurrentNode(0);
-                g2.shortestPath(start, end);
+                if (g1Move) {
+                    controller.get(Textfield.class, "Message1_Route").setText("");
+                    controller.get(Textfield.class, "Message1_Weight").setText("");
+                    controller.get(Textfield.class, "Message2_Route").setText("");
+                    controller.get(Textfield.class, "Message2_Weight").setText("");
+
+                    m1.setPosition(start.position);
+                    g1.setCurrentNode(0);
+                    g1.shortestPath(start, end);
+
+
+                } else {
+                    m2.setPosition(start.position);
+                    g2.setCurrentNode(0);
+                    g2.shortestPath(start, end);
+
+
+                }
                 isStart = true;
             } else if (isPaused && isStart) {
                 isPaused = false;
@@ -653,6 +723,8 @@ public class Animation extends PApplet {
             controller.get(Toggle.class, "Start_Pause").setValue(true);
             m1.setPosition(start.position);
             m2.setPosition(start.position);
+            g1.clearPath();
+            g2.clearPath();
         }
     }
 
@@ -680,12 +752,5 @@ public class Animation extends PApplet {
         controller.get(Textfield.class, "R7_R5").setText(Integer.toString(r7.getEdge(r5).getWeight()));
         controller.get(Textfield.class, "R7_R8").setText(Integer.toString(r7.getEdge(r8).getWeight()));
         controller.get(Textfield.class, "R8_R4").setText(Integer.toString(r8.getEdge(r4).getWeight()));
-    }
-
-    public boolean isOneSeven(String s) {
-        double digit = Double.parseDouble(s);
-        String regex = "^";
-
-        return true;
     }
 }

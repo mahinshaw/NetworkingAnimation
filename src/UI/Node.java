@@ -24,6 +24,7 @@ public class Node implements Comparable<Node> {
     ArrayList<Node> successors = new ArrayList<Node>();
     int edgeCount;
     private final int order;
+    String name;
 
     public Node(PApplet p, int o) {
         parent = p;

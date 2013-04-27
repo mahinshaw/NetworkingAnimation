@@ -32,7 +32,7 @@ public class Edge {
         start = s;
         end = e;
         weight = getRandom();
-        color = parent.color(0, 0, 0);
+        color = parent.color(255, 255, 255);
     }
 
     public Edge(PApplet p, Node s, Node e, int w) {
@@ -40,7 +40,7 @@ public class Edge {
         start = s;
         end = e;
         weight = w;
-        color = parent.color(0, 0, 0);
+        color = parent.color(255, 255, 255);
     }
 
     public int getWeight() {
@@ -65,7 +65,7 @@ public class Edge {
 
     public void display() {
         if (start.className() != "Layer" && end.className() != "Layer") {
-            parent.fill(color);
+            parent.stroke(color);
             parent.line(start.position.x, start.position.y, end.position.x, end.position.y);
         }
     }
