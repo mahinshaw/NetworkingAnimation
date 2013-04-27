@@ -522,7 +522,7 @@ public class Animation extends PApplet {
             m1.setMessage(message1);
             g1.travel(isStart, isPaused);
             g1.output(i);
-            if (m1.position.equals(tl1.position)) {
+            if (m1.position.equals(nl1.position)) {
                 Message1_Route(g1.routersToString());
                 Message1_Weight(g1.PathLength());
             }
@@ -537,7 +537,7 @@ public class Animation extends PApplet {
             m2.setMessage(message2);
             g2.travel(isStart, isPaused);
             g2.output(i);
-            if (m2.position.equals(tl1.position)) {
+            if (m2.position.equals(nl1.position)) {
                 Message2_Route(g2.routersToString());
                 Message2_Weight(g2.PathLength());
             }
