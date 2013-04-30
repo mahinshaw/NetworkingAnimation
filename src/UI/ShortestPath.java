@@ -12,8 +12,7 @@ import java.util.Set;
  * @ email: mahinshaw@gmail.com
  * @ github: https://github.com/mahinshaw/NetworkingAnimation.git
  *
- * This class is a message that travels from location to location.  This method will contain all the information needed for display within the message.
- * All calculations are done locally and can be called for use in other classes.
+ * This class is used to generate the shortest path from end to end of a graph.
  *
  */
 

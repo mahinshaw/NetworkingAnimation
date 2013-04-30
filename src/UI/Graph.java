@@ -11,8 +11,7 @@ import processing.core.*;
  * @ email: mahinshaw@gmail.com
  * @ github: https://github.com/mahinshaw/NetworkingAnimation.git
  *
- * This class is a message that travels from location to location.  This method will contain all the information needed for display within the message.
- * All calculations are done locally and can be called for use in other classes.
+ * This class is the graph on which the message will travel.
  *
  */
 
@@ -20,7 +19,7 @@ public class Graph {
 
     PApplet parent;
     List<Node> nodes = new ArrayList<Node>();
-    ;
+
     List<Node> routers = new ArrayList<Node>();
     Message message;
     PVector horizSpeed, vertSpeed;
@@ -77,9 +76,7 @@ public class Graph {
         return distance;
     }
 
-    /*
-     * need to finish the shortest path implementation
-     */
+
     public void shortestPath(Node start, Node finish) {
         ShortestPath route = new ShortestPath(this);
         route.execute(start, finish);

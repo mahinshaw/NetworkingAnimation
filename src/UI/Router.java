@@ -7,7 +7,7 @@ import processing.core.*;
  * @ email: mahinshaw@gmail.com
  * @ github: https://github.com/mahinshaw/NetworkingAnimation.git
  * 
- * This class is a router location within the anmination.
+ * This class is a router location within the animation.
  */
 
 public class Router extends Node {
