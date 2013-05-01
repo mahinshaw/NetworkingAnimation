@@ -41,8 +41,8 @@ public class Animation extends PApplet {
     Router r1, r2, r3, r4, r5, r6, r7, r8;
 
     // declaration for Message classes
-    Message m1, m2;
-    int m1Color, m2Color;
+    Message m1, m2, md;
+    int m1Color, m2Color, mdColor;
     String message1, message2;
 
     // declare the variables used for navigating the network
@@ -82,6 +82,9 @@ public class Animation extends PApplet {
     boolean isStart;
     boolean isEnd;
     boolean g1Move;
+
+    DrawDijkstra dijkstra;
+    boolean draw;
 
     public void setup() {
         size(displayWidth, displayHeight);
@@ -315,6 +318,13 @@ public class Animation extends PApplet {
                 .setFont(f)
         ;
 
+        controller.addBang("Draw_Shortest")
+                .setPosition(map(500, 0, 1600, 0, width), map(50, 0, 900, 0, height))
+                .setSize(80, 40)
+                .getCaptionLabel().align(CENTER, CENTER).setText("Dijkstra")
+                .setFont(f)
+        ;
+
         controller.addKnob("Speed")
                 .setPosition(map(350, 0, 1600, 0, width), map(50, 0, 900, 0, height))
                 .setColorValueLabel(color(0, 0, 0))
@@ -456,6 +466,11 @@ public class Animation extends PApplet {
 
         // input the values for the edge weights into the text fields
         setWeightTextFields();
+
+        // draw Dijkstra variables
+        mdColor = color(0, 255, 0);
+        md = new Message(this, r1.position, 30, 30, mdColor, "");
+        dijkstra = new DrawDijkstra(this, md);
     }
 
     public void draw() {
@@ -548,6 +563,10 @@ public class Animation extends PApplet {
                 resetRouterWeights();
                 setWeightTextFields();
             }
+        }
+
+        if (draw){
+            draw = dijkstra.travel();
         }
 
     }
@@ -714,6 +733,11 @@ public class Animation extends PApplet {
             r8.getEdge(r4).setWeight(Integer.parseInt(value));
         else
             controller.get(Textfield.class, "R8_R4").setText(String.valueOf(r8.getEdge(r4).getWeight()));
+    }
+
+    public void Draw_Shortest(){
+        dijkstra.drawShortest(r1, r4);
+        draw = true;
     }
 
     public void Stop() {

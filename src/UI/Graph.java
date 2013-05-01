@@ -23,9 +23,9 @@ public class Graph {
     List<Node> routers = new ArrayList<Node>();
     Message message;
     PVector horizSpeed, vertSpeed;
-    private int nodeCount;
-    private int currentNode;
-    private boolean ackSent;
+    int nodeCount;
+    int currentNode;
+    boolean ackSent;
 
     public Graph(PApplet p, Message m) {
         parent = p;
