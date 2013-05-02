@@ -565,10 +565,14 @@ public class Animation extends PApplet {
             }
         }
 
-        if (draw){
-            draw = dijkstra.travel();
-        }
 
+        if(!isStart){
+            if (draw){
+                draw = dijkstra.travel();
+            }
+            dijkstra.drawSettled();
+            dijkstra.drawRoute();
+        }
     }
 
 	/*
@@ -606,6 +610,7 @@ public class Animation extends PApplet {
 
     public void Start_Pause(boolean value) {
         if (!value) {
+            dijkstra.clearDraw();
             controller.get(Toggle.class, "Start_Pause").setCaptionLabel("Pause");
             if (!isPaused && !isStart) {
                 if (g1Move) {
@@ -736,8 +741,10 @@ public class Animation extends PApplet {
     }
 
     public void Draw_Shortest(){
-        dijkstra.drawShortest(r1, r4);
-        draw = true;
+        if(!isStart){
+            dijkstra.drawShortest(r1, r4);
+            draw = true;
+        }
     }
 
     public void Stop() {
